@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Deudas</title>
+    <link rel="stylesheet" href="../styles/registro_deudas_styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <button class="back-button">&lt;</button>
+        <h1>Registra tus Deudas</h1>
+      </header>
+      <form>
+        <label for="monto">Monto a Pagar:</label>
+        <input type="text" id="monto" name="monto" />
+
+        <label for="categoria">Categoria:</label>
+        <input type="text" id="categoria" name="categoria" />
+
+        <label for="fecha">Fecha de Vencimiento:</label>
+        <input type="text" id="fecha" name="fecha" placeholder="--/--/----" />
+
+        <label for="descripcion">Descripción:</label>
+        <textarea id="descripcion" name="descripcion"></textarea>
+
+        <button type="submit">REGISTRAR</button>
+      </form>
+    </div>
+  </body>
+</html>
