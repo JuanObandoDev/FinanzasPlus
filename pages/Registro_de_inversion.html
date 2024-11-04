@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Inversiones</title>
+    <link rel="stylesheet" href="../styles/registro_inversion_styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <button class="back-button">&lt;</button>
+        <h1>Registrar nueva Inversión</h1>
+      </header>
+      <form>
+        <label for="monto">Monto:</label>
+        <input type="text" id="monto" name="monto" placeholder="$$$$$$$$" />
+
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" name="tipo">
+          <option value="cuentas-ahorro">
+            Cuentas de ahorro de alto rendimiento
+          </option>
+          <option value="acciones">Acciones</option>
+          <option value="criptomonedas">Criptomonedas</option>
+          <option value="metales-preciosos">Metales preciosos</option>
+        </select>
+
+        <label for="descripcion">Descripción (opcional):</label>
+        <textarea id="descripcion" name="descripcion"></textarea>
+
+        <button type="submit">REGISTRAR</button>
+      </form>
+    </div>
+  </body>
+</html>

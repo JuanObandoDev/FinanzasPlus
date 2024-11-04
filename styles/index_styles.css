@@ -1,0 +1,84 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+header {
+  background-color: #4caf50;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+}
+main {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
+img {
+  width: 100%;
+  height: auto;
+  max-width: 300px;
+  margin: 20px 0;
+}
+p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333333;
+  margin: 20px auto;
+  max-width: 600px;
+  line-height: 1.5;
+}
+.cta {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+.btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+.btn:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+footer {
+  background-color: #333333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+}
+footer p {
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+  header,
+  main,
+  footer {
+    padding: 10px;
+    text-align: center;
+  }
+  img {
+    max-width: 100%;
+  }
+  p {
+    font-size: 1rem;
+    margin: 10px auto;
+  }
+  .btn {
+    width: 100%;
+    padding: 10px 0;
+  }
+}
