@@ -1,74 +1,96 @@
-body{
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    margin: 0; padding: 0;
-    background-color: #f4f4f4;
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
 }
-header{
-    background-color: #4caf50;
-    background-attachment: fixed;
+
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
 }
-main{
-    flex: 1;
-    padding: 20px;
-    text-align: center;
+
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
-.atras{
-    float: left;
-    width: 45px;
-    height: auto;
-    max-width: 150px;
-    margin: 5px 0;
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
 }
-.dudas{
-    float: right;
-    width: 25px;
-    height: auto;
-    max-width: 150px;
-    margin: 10px 0;
+
+h1 {
+  font-size: 18px;
+  margin: 0;
 }
-main a{
-    margin: 20px 0;
-    text-decoration: none;
+
+form {
+  display: flex;
+  flex-direction: column;
 }
-main input,textarea{
-    margin: 10px;
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
 }
-.btn {
-    display: inline-block;
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease;
+
+input,
+select,
+textarea {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
 }
-.btn:hover {
-    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+
+textarea {
+  resize: none;
+  height: 60px;
 }
-footer {
-    background-color: #333333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-    position: relative;
-    width: 100%;
-    bottom: 0;
+
+button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Responsive Design */
 @media (max-width: 600px) {
-    header, main, footer {
-      padding: 10px;
-      text-align: center;
-    }
-    img {
-      max-width: 100%;
-    }
-    .btn {
-        width: 100%;
-        padding: 10px 0;
-    }
+  .container {
+    width: 90%;
+    padding: 10px;
+  }
+  h1 {
+    font-size: 16px;
+  }
+  input,
+  select,
+  textarea,
+  button[type="submit"] {
+    font-size: 14px;
+    padding: 8px;
+  }
 }

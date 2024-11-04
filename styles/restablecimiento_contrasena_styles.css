@@ -64,7 +64,7 @@ input {
   width: 100%;
 }
 
-button {
+.btn {
   background-color: #4caf50;
   color: white;
   border: none;
@@ -75,7 +75,7 @@ button {
   width: 100%;
 }
 
-button:hover {
+.btn:hover {
   background-color: #45a049;
 }
 
