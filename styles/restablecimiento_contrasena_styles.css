@@ -18,6 +18,22 @@ body {
   text-align: center;
 }
 
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+}
+
 header h1 {
   font-size: 18px;
   margin-bottom: 20px;
