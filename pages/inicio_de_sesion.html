@@ -5,19 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio de Sesion</title>
     <link rel="stylesheet" href="../styles/inicio_de_sesion_styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   </head>
   <body>
     <main>
       <img src="../img/Usuario.png" alt=" Usuario" />
       <h1>Inicio de sesión</h1>
-      <form>
-        <label>Usuario: </label>
-        <input type="text" name="usuario" />
+      <form id="formInicioUsuario">
+        <label>Email: </label>
+        <input type="email" name="email" id="email" required />
         <br />
         <label>Contraseña: </label>
-        <input type="password" name="password" />
+        <input type="password" name="password" id="password" required />
         <br />
-        <a href="./inicio.html" class="btn">Acceder</a>
+        <button class="btn">Acceder</button>
         <br />
         <a href="./Restablecimiento_de_contrasena.html">Olvide mi contraseña</a>
         <br />
@@ -27,5 +29,6 @@
     <footer>
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
+    <script src="../backend/inicio_sesion.js"></script>
   </body>
 </html>
