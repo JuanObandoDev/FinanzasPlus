@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Restablecer Contraseña</title>
     <link rel="stylesheet" href="../styles/creacion_nueva_contrasena.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -13,7 +15,7 @@
       </header>
       <main>
         <p>Por favor, ingresa tu nueva contraseña.</p>
-        <form>
+        <form id="createNewPassForm">
           <label for="new-password">Nueva Contraseña</label>
           <input type="password" id="new-password" name="new-password" />
 
@@ -24,9 +26,10 @@
             name="confirm-password"
           />
 
-          <a href="./inicio_de_sesion.html">Confirmar</a>
+          <button>Confirmar</button>
         </form>
       </main>
     </div>
+    <script src="../backend/crear_nueva_contrasena.js"></script>
   </body>
 </html>

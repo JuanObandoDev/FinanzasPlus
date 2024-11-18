@@ -18,5 +18,6 @@ document
       alert("El usuario no existe!");
       return;
     }
+    localStorage.setItem("userEmail", email);
     window.location.href = "../pages/Creacion_nueva_contrasena.html";
   });
