@@ -11,17 +11,11 @@ document
     const password = document.getElementById("password").value;
     const encPass = CryptoJS.MD5(password).toString();
 
-    console.log("Email:", email);
-    console.log("Contraseña encriptada:", encPass);
-
     const { data, error } = await SUPABASE.from("usuarios")
       .select("id_usuario, username, email")
       .eq("email", email)
       .eq("password", encPass)
       .single();
-
-    console.log("Data:", data);
-    console.log("Error:", error);
 
     if (error) {
       alert("Credenciales inválidas. Por favor, intenta de nuevo.");
