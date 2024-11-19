@@ -8,9 +8,14 @@
   </head>
   <body>
     <header>
-      <img src="../img/Usurio.png" alt="Usurio" class="usuario" />
+      <img
+        src="../img/Usurio.png"
+        alt="Usurio"
+        class="usuario"
+        id="usuarioIcon"
+      />
       <a href="./inicio.html">Finanzas Inteligentes</a>
-      <img src="../img/Dudas.png" alt="Dudas" class="dudas" />
+      <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
     </header>
     <main>
       <nav>
@@ -30,5 +35,26 @@
     <footer>
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
+    <div id="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
+      <a href="#">Perfil</a>
+      <a href="#">Configuración</a>
+      <a href="#">Reporte General</a>
+      <a href="#">Material Educativo</a>
+      <a href="./inicio_de_sesion.html">Cerrar sesión</a>
+    </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Ayuda</h2>
+        <p>
+          En esta interfaz puedes ver el resumen general de tus ingresos y
+          gastos realizados y registrados en el sistema.
+        </p>
+      </div>
+    </div>
+    <script src="../backend/inicio.js"></script>
   </body>
 </html>
