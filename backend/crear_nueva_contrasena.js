@@ -15,9 +15,12 @@ document
       return;
     }
 
-    const email = localStorage.getItem("userEmail");
+    let email = localStorage.getItem("userEmail");
     if (!email) {
-      return;
+      email = localStorage.getItem("startSessionUser");
+      if (!email) {
+        return;
+      }
     }
 
     const encPass = CryptoJS.MD5(newPass).toString();
@@ -31,5 +34,7 @@ document
       return;
     }
     localStorage.removeItem("userEmail");
+    localStorage.removeItem("startSessionUser");
+    alert("La contraseña ha sido actualizada exitosamente");
     window.location.href = "../pages/inicio_de_sesion.html";
   });
