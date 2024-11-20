@@ -1,0 +1,123 @@
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  margin-right: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  color: #000;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 18px;
+  margin: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.form-group {
+  width: 100%;
+  margin: 15px 0;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.btn:hover {
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+  background-color: #45a049;
+}
+
+footer {
+  background-color: #333333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  position: relative;
+  width: 100%;
+  bottom: 0;
+}
+
+footer p {
+  margin: 0; /* Añadir margen cero para el párrafo del footer */
+}
+
+/* Diseño responsive */
+@media (max-width: 600px) {
+  main,
+  footer {
+    padding: 10px;
+    text-align: center;
+  }
+
+  form {
+    width: 100%;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 10px 0;
+  }
+}

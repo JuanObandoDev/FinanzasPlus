@@ -21,5 +21,6 @@ document
       alert("Credenciales inválidas. Por favor, intenta de nuevo.");
       return;
     }
+    localStorage.setItem("startSessionUser", email);
     window.location.href = "../pages/inicio.html";
   });
