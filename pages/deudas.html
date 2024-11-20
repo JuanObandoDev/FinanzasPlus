@@ -8,9 +8,14 @@
   </head>
   <body>
     <header>
-      <img src="../img/Usurio.png" alt="Usuario" class="usuario" />
+      <img
+        src="../img/Usurio.png"
+        alt="Usurio"
+        class="usuario"
+        id="usuarioIcon"
+      />
       <a href="./inicio.html">Finanzas Inteligentes</a>
-      <img src="../img/Dudas.png" alt="Dudas" class="dudas" />
+      <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
     </header>
     <main>
       <nav>
@@ -72,5 +77,27 @@
     <footer>
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
+    <div id="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
+      <a href="./perfil.html">Perfil</a>
+      <a href="./notificaciones.html">Configuración</a>
+      <a href="#">Reporte General</a>
+      <a href="#">Material Educativo</a>
+      <button id="closeSession">Cerrar sesión</button>
+    </div>
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Ayuda</h2>
+        <p>
+          En esta interfaz puedes agregar pagos, agregar deudas, editarlas y
+          eliminarlas de tu lista de deudas.
+        </p>
+      </div>
+    </div>
+    <script src="../backend/inicio.js"></script>
+    <script src="../backend/cerrar_sesion.js"></script>
   </body>
 </html>
