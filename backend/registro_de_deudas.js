@@ -12,6 +12,16 @@ document
     const fecha = document.getElementById("fecha").value;
     const descripcion = document.getElementById("descripcion").value;
 
+    if (isNaN(monto) || monto <= 0) {
+        alert("El monto debe ser un número positivo.");
+        return;
+    }
+  
+    if (!fecha || isNaN(Date.parse(fecha))) {
+        alert("Debe seleccionar una fecha válida.");
+        return;
+    }
+
     const data = {
         monto: monto,
         categoria: categoria,
@@ -31,7 +41,8 @@ document
       });
 
       if (!response.ok) {
-        throw new Error("Error al guardar los datos en el servidor");
+        const errorData = await response.json();
+        throw new Error(errorData.message ||"Error al guardar los datos en el servidor");
       }
 
       alert("su desuda ha sido registrada exitosamente");

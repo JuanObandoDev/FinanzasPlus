@@ -18,7 +18,13 @@
         <input type="number" id="monto" name="monto" />
 
         <label for="categoria">Categoria:</label>
-        <input type="text" id="categoria" name="categoria" />
+        <select id="categoria" name="categoria">
+          <option value="de-consumo">Deuda de consumo</option>
+          <option value="prestamos-personales">Préstamos personales</option>
+          <option value="hipotecarios">Deuda hipotecaria</option>
+          <option value="educativa">Deuda educativa</option>
+          <option value="otros">otros</option>
+        </select>
 
         <label for="fecha">Fecha de Vencimiento:</label>
         <input type="date" id="fecha" name="fecha" placeholder="--/--/----" />
