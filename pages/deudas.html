@@ -35,15 +35,30 @@
             <th>fecha</th>
             <th>Categoría</th>
             <th>Descripcion</th>
+            <th>Acciones</th>
           </tr>
         </thead>
         <tbody id="dudaTabla">
         </tbody>
       </table>
+      <div id="editFormContainer" style="display: none;">
+        <h3>Editar Deuda</h3>
+        <form id="editForm">
+          <input type="hidden" id="editId">
+          <label>Monto:</label>
+          <input type="number" id="editMonto" required>
+          <label>Fecha:</label>
+          <input type="date" id="editFecha" required>
+          <label>Categoría:</label>
+          <input type="text" id="editCategoria" required>
+          <label>Descripción:</label>
+          <input type="text" id="editDescripcion" required>
+          <button type="submit">Guardar Cambios</button>
+          <button type="button" onclick="cerrarFormulario()">Cancelar</button>
+        </form>
+      </div>
       <div class="actions">
         <a href="./Registro_de_deudas.html" class="btn add">Agregar</a>
-        <a href="./Registro_de_deudas.html" class="btn edit">Editar</a>
-        <a href="#" class="btn delete">Eliminar</a>
         <a href="./Registro_de_gastos.html" class="btn add">Agregar Pago</a>
       </div>
     </main>
