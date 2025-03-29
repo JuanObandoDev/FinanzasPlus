@@ -1,5 +1,6 @@
 function close_session() {
   localStorage.removeItem("startSessionUser");
+  localStorage.removeItem("userId");
   window.location.href = "../pages/inicio_de_sesion.html";
 }
 document
