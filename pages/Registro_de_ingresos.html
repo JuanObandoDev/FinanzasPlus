@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrar Ingresos</title>
     <link rel="stylesheet" href="../styles/registro_ingresos_styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
   </head>
   <body>
     <div class="container">
@@ -12,18 +14,27 @@
         <a href="./ingresos.html" class="back-button">&lt;</a>
         <h1>Registra tus Ingresos</h1>
       </header>
-      <form>
+      <form id="incomeForm">
         <label for="monto">Monto:</label>
-        <input type="text" id="monto" name="monto" placeholder="$$$$$$$$" />
+        <input
+          type="number"
+          id="monto"
+          name="monto"
+          placeholder="$$$$$$$$"
+          required="true"
+        />
 
         <label for="fuente">Fuente:</label>
-        <input type="text" id="fuente" name="fuente" />
+        <select id="fuente" name="fuente"></select>
 
-        <label for="descripcion">Descripción (opcional):</label>
+        <label id="descripcionLabel" for="descripcion"
+          >Descripción (opcional):</label
+        >
         <textarea id="descripcion" name="descripcion"></textarea>
 
-        <a href="./ingresos.html" class="submit">Registrar</a>
+        <button class="submit">Registrar</button>
       </form>
     </div>
+    <script src="../backend/registro_ingresos.js"></script>
   </body>
 </html>
