@@ -11,8 +11,9 @@ document
     const categoria = document.getElementById("categoria").value;
     const fecha = document.getElementById("fecha").value;
     const descripcion = document.getElementById("descripcion").value;
+    const id_usuario = localStorage.getItem("userId");
 
-    if (isNaN(monto) || monto <= 0) {
+    if (monto <= 0) {
         alert("El monto debe ser un número positivo.");
         return;
     }
@@ -23,6 +24,7 @@ document
     }
 
     const data = {
+        id_usuario: id_usuario,
         monto: monto,
         categoria: categoria,
         fecha: fecha,

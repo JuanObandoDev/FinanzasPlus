@@ -37,6 +37,9 @@ document
             <button onclick="eliminarDeuda(${deuda.id})" style="background-color: red; color: white;">
               🗑️ Eliminar
             </button>
+            <button onclick="pagarDeuda(${deuda.id},${deuda.monto})" style="background-color: green; color: white;>
+              💰 Pagar
+            </button>
           </td>
           `;
           tableBody.appendChild(fila);
@@ -56,11 +59,11 @@ document
     document.getElementById("editFecha").value = fecha;
     document.getElementById("editCategoria").value = categoria;
     document.getElementById("editDescripcion").value = descripcion;
-    document.getElementById("editFormContainer").style.display = "block";
+    document.getElementById("editFilaForm").style.display = "block";
   }
   
   function cerrarFormulario() {
-    document.getElementById("editFormContainer").style.display = "none";
+    document.getElementById("editFilaForm").style.display = "none";
   }
   
   document
@@ -74,7 +77,7 @@ document
     const categoria = document.getElementById("editCategoria").value.trim();
     const descripcion = document.getElementById("editDescripcion").value.trim();
   
-    if (isNaN(monto) || monto <= 0) {
+    if (monto <= 0) {
       alert("El monto debe ser un número positivo.");
       return;
     }
@@ -125,3 +128,68 @@ document
     }
   }
   
+  function pagarDeuda(id,monto){
+    document.getElementById("pagoId").value = id;
+    document.getElementById("pagoMonto").value = monto;
+    document.getElementById("agregarPagoForm").style.display = "block";
+  }
+
+  function cerrarFormularioPago(){
+    document.getElementById("agregarPagoForm").style.display="none";
+  }
+
+  document
+    .getElementById("pagoFrom")
+    .addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const id = document.getElementById("pagoDeudaId").value;
+    const montoPago = parseFloat(document.getElementById("montoPago").value);
+
+    if (montoPago <= 0) {
+      alert(" El monto debe ser un número positivo.");
+      return;
+    }
+
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/deudas?id=eq.${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${SUPABASE_KEY}`,
+      apikey: SUPABASE_KEY,
+    },
+  });
+
+  if (!response.ok) {
+    alert(" Error al obtener los datos de la deuda.");
+    return;
+  }
+
+  const deuda = await response.json();
+  let montoRestante = deuda[0].monto - montoPago;
+
+  if (montoRestante < 0) {
+    alert(" No puedes pagar más de lo que debes.");
+    return;
+  }
+
+  try {
+    const responseUpdate = await fetch(`${SUPABASE_URL}/rest/v1/deudas?id=eq.${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        apikey: SUPABASE_KEY,
+      },
+      body: JSON.stringify({ monto: montoRestante }),
+    });
+
+    if (!responseUpdate.ok) throw new Error("Error al actualizar la deuda");
+
+    alert("Pago registrado correctamente.");
+    cerrarPagoForm();
+    cargarDeudas();
+  } catch (error) {
+    console.error("Error:", error.message);
+    alert("No se pudo procesar el pago. Inténtelo más tarde.");
+  }
+});
