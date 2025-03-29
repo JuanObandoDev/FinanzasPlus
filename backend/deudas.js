@@ -38,7 +38,7 @@ document
         alert("No se pudieron cargar las deudas. Inténtelo más tarde.");
       }
     }
-  
+    
     cargarDeudas(); 
   });
   
