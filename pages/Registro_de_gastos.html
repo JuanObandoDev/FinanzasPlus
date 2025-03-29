@@ -13,12 +13,22 @@
         <a href="./gastos.html" class="back-button">&lt;</a>
         <h1>Registra tus Gastos</h1>
       </header>
-      <form>
+      <form id="gastosForm">
         <label for="monto">Monto:</label>
         <input type="number" id="monto" name="monto" placeholder="$$$$$$$$" />
 
         <label for="categoria">Categoría:</label>
-        <input type="text" id="categoria" name="categoria" />
+        <select id="categoria" name="categoria">
+          <option value="Vivienda">Vivienda</option>
+          <option value="Alimentación">Alimentación</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Salud ">Salud</option>
+          <option value="Educacion">Educación</option>
+          <option value="Entretenimiento">Entretenimiento</option>
+          <option value="cuidado-personal">Cuidado Personal</option>
+          <option value="Viajes">Viajes</option>
+          <option value="otros">otros</option>
+        </select>
 
         <label for="descripcion">Descripción (opcional):</label>
         <textarea id="descripcion" name="descripcion"></textarea>
@@ -26,5 +36,6 @@
         <a href="./gastos.html" class="submit">Registrar</a>
       </form>
     </div>
+    <script src="../backend/registro_de_gastos.js"></script>
   </body>
 </html>
