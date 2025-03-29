@@ -19,6 +19,24 @@ document
 
     const encPass = CryptoJS.MD5(password).toString();
 
+    const checkEmailResponse = await fetch(
+      `${SUPABASE_URL}/rest/v1/usuarios?email=eq.${email}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${SUPABASE_KEY}`,
+          apikey: SUPABASE_KEY,
+        },
+      }
+    );
+
+    const checkEmailData = await checkEmailResponse.json();
+    if (checkEmailData.length > 0) {
+      alert("El correo electrónico ya está registrado");
+      return;
+    }
+
     const data = {
       username: username,
       email: email,
