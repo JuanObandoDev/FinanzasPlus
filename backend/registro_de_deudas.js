@@ -47,7 +47,7 @@ document
         throw new Error(errorData.message ||"Error al guardar los datos en el servidor");
       }
 
-      alert("su desuda ha sido registrada exitosamente");
+      alert("su deuda ha sido registrada exitosamente");
       window.location.href = "../pages/deudas.html";
     } catch (error) {
       alert(error.message);
