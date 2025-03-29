@@ -18,11 +18,11 @@ document
       .eq("password", encPass)
       .single();
 
-    console.error(error);
     if (error) {
       alert("Credenciales inválidas. Por favor, intenta de nuevo.");
       return;
     }
     localStorage.setItem("startSessionUser", email);
+    localStorage.setItem("userId", data.id_usuario);
     window.location.href = "../pages/inicio.html";
   });
