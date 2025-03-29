@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrar Inversiones</title>
     <link rel="stylesheet" href="../styles/registro_inversion_styles.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   </head>
   <body>
     <div class="container">
@@ -14,7 +15,7 @@
       </header>
       <form>
         <label for="monto">Monto:</label>
-        <input type="text" id="monto" name="monto" placeholder="$$$$$$$$" />
+        <input type="number" id="monto" name="monto" placeholder="$$$$$$$$" />
 
         <label for="tipo">Tipo:</label>
         <select id="tipo" name="tipo">
