@@ -6,7 +6,9 @@ const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 window.onload = async function (event) {
   event.preventDefault();
 
-  const { data, error } = await SUPABASE.from("fuentes").select("nombre");
+  const { data, error } = await SUPABASE.from("fuentes_ingresos").select(
+    "nombre"
+  );
 
   if (error) {
     console.error("Error fetching data:", error);
@@ -66,9 +68,10 @@ document
     const monto = document.getElementById("monto").value;
     let fuente = document.getElementById("fuente").value;
     let descripcion = document.getElementById("descripcion").value;
+    const id_usuario = localStorage.getItem("userId");
 
     if (descripcion.length === 0) {
-      const { data, error } = await SUPABASE.from("fuentes")
+      const { data, error } = await SUPABASE.from("fuentes_ingresos")
         .select("descripcion")
         .eq("nombre", fuente)
         .single();
@@ -80,21 +83,20 @@ document
       }
     }
 
-    const id_usuario = localStorage.getItem("userId");
-    const id_fuente = await SUPABASE.from("fuentes")
-      .select("id_fuente")
+    const id_fuente = await SUPABASE.from("fuentes_ingresos")
+      .select("id_fuente_ingreso")
       .eq("nombre", fuente)
       .single();
     if (id_fuente.error) {
       console.error("Error fetching data:", id_fuente.error);
       return;
     }
-    const id_fuente_value = id_fuente.data.id_fuente;
+    const id_fuente_value = id_fuente.data.id_fuente_ingreso;
 
     const data = {
       id_usuario: id_usuario,
       monto: monto,
-      id_fuente: id_fuente_value,
+      id_fuente_ingreso: id_fuente_value,
       descripcion: descripcion,
     };
 
