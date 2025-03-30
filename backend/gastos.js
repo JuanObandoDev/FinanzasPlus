@@ -25,15 +25,15 @@ document
         gastos.forEach((gasto) => {
           const fila = document.createElement("tr");
           fila.innerHTML = `
-            <td>${gasto.id}</td>
+            <td>${gasto.id_gasto}</td>
             <td>$${gasto.monto.toFixed(2)}</td>
-            <td>${gasto.categoria}</td>
+            <td>${gasto.id_categoria_gasto}</td>
             <td>${gasto.descripcion}</td>
              <td>
-            <button onclick="editarGasto(${gasto.id}, ${gasto.monto}, '${gasto.categoria}', '${gasto.descripcion}')">
+            <button onclick="editarGasto(${gasto.id_gasto}, ${gasto.monto}, '${gasto.id_categoria_gasto}', '${gasto.descripcion}')">
               ✏️ Editar
             </button>
-            <button onclick="eliminarGasto(${gasto.id})" style="background-color: red; color: white;">
+            <button onclick="eliminarGasto(${gasto.id_gasto})" style="background-color: red; color: white;">
               🗑️ Eliminar
           </td>
           `;
@@ -48,10 +48,10 @@ document
     cargarGastos(); 
   });
 
-  function editarGasto(id, monto, categoria, descripcion) {
-    document.getElementById("editId").value = id;
+  function editarGasto(id_gasto, monto, id_categoria_gasto, descripcion) {
+    document.getElementById("editId").value = id_gasto;
     document.getElementById("editMonto").value = monto;
-    document.getElementById("editCategoria").value = categoria;
+    document.getElementById("editCategoria").value = id_categoria_gasto;
     document.getElementById("editDescripcion").value = descripcion;
     document.getElementById("editFilaForm").style.display = "block";
   }
@@ -65,9 +65,9 @@ document
     .addEventListener("submit", async function (event) {
     event.preventDefault();
   
-    const id = document.getElementById("editId").value;
+    const id_gasto = document.getElementById("editId").value;
     const monto = parseFloat(document.getElementById("editMonto").value);
-    const categoria = document.getElementById("editCategoria").value.trim();
+    const id_categoria_gasto = document.getElementById("editCategoria").value.trim();
     const descripcion = document.getElementById("editDescripcion").value.trim();
   
     if (monto <= 0) {
@@ -76,14 +76,14 @@ document
     }
   
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/gastos?id=eq.${id}`, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/gastos?id=eq.${id_gasto}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${SUPABASE_KEY}`,
           apikey: SUPABASE_KEY,
         },
-        body: JSON.stringify({ monto, categoria, descripcion }),
+        body: JSON.stringify({ monto, id_categoria_gasto, descripcion }),
       });
   
       if (!response.ok) throw new Error("Error al actualizar el gasto");
@@ -97,12 +97,12 @@ document
     }
   });
 
-  async function eliminarGasto(id) {
+  async function eliminarGasto(id_gasto) {
     const confirmacion = confirm("¿Seguro que quieres eliminar este gasto?");
     if (!confirmacion) return;
   
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/gastos?id=eq.${id}`, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/gastos?id=eq.${id_gasto}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -6,7 +6,7 @@ document
     const SUPABASE_URL = "https://fghnnxllxilqupwtrezh.supabase.co";
     const SUPABASE_KEY =
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnaG5ueGxseGlscXVwd3RyZXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzcyNjEsImV4cCI6MjA1ODc1MzI2MX0.6UiQbo7HZw_Ww1VNFbhRHVeSYz8C-parH1raEAy1_Uk";
-
+    
     const monto = document.getElementById("monto").value;
     const categoria = document.getElementById("categoria").value;
     const descripcion = document.getElementById("descripcion").value;
@@ -17,10 +17,14 @@ document
         return;
     }
 
+    const id_categoria_gasto = await SUPABASE.from("categorias_gastos").select(
+      "id_categoria_gasto"
+    ).eq("nombre",categoria).single(); 
+
     const data = {
         id_usuario: id_usuario,
         monto: monto,
-        categoria: categoria,
+        categoria: id_categoria_gasto.data.id_categoria_gasto,
         descripcion:descripcion,
     };
 
