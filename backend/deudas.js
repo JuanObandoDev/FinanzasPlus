@@ -25,9 +25,7 @@ document
         let contador = 1;
         
         deudas.forEach(async(deuda) => {
-          console.log(deuda);
           const id_categoria = await SUPABASE.from("categorias_deudas").select("nombre").eq("id_categoria_deuda",deuda.id_categoria_deuda).single();
-          console.log(id_categoria.error);
           const fila = document.createElement("tr");
           fila.innerHTML = `
             <td>${contador}</td>
@@ -39,7 +37,7 @@ document
             <button onclick="editarDeuda(${deuda.id}, ${deuda.monto_pagar}, '${deuda.fecha_vencimiento}', '${id_categoria.data.nombre}', '${deuda.descripcion}')">
               ✏️ Editar
             </button>
-            <button onclick="eliminarDeuda(${deuda.id})" style="background-color: red; color: white;">
+            <button onclick="eliminarDeuda(${deuda.id_deuda})" style="background-color: red; color: white;">
               🗑️ Eliminar
             </button>
             <button onclick="pagarDeuda(${deuda.id},${deuda.monto})" style="background-color: green; color: white;">
@@ -110,12 +108,12 @@ document
     }
   });
 
-  async function eliminarDeuda(id) {
+  async function eliminarDeuda(id_deuda) {
     const confirmacion = confirm("¿Seguro que quieres eliminar esta deuda?");
     if (!confirmacion) return;
   
     try {
-      const response = await fetch(`${SUPABASE_URL}/rest/v1/deudas?id=eq.${id}`, {
+      const response = await fetch(`${SUPABASE_URL}/rest/v1/deudas?id=eq.${id_deuda}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
