@@ -1,9 +1,8 @@
 document
     .addEventListener("DOMContentLoaded", async function () {
     const SUPABASE_URL = "https://fghnnxllxilqupwtrezh.supabase.co";
-    const SUPABASE_KEY =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnaG5ueGxseGlscXVwd3RyZXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzcyNjEsImV4cCI6MjA1ODc1MzI2MX0.6UiQbo7HZw_Ww1VNFbhRHVeSYz8C-parH1raEAy1_Uk";
-
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnaG5ueGxseGlscXVwd3RyZXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzcyNjEsImV4cCI6MjA1ODc1MzI2MX0.6UiQbo7HZw_Ww1VNFbhRHVeSYz8C-parH1raEAy1_Uk";
+    const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     const tableBody = document.getElementById("inversionesTabla");
   
     async function cargarInversiones() {
@@ -21,13 +20,16 @@ document
   
         const inversiones = await response.json();
         tableBody.innerHTML = "";
+
+        let contador = 1;
   
-        inversiones.forEach((inversion) => {
+        inversiones.forEach(async(inversion) => {
+          const id_tipo = await SUPABASE.from("tipos_inversiones").select("nombre").eq("id_tipo_inversion",inversion.id_tipo_inversion).single();
           const fila = document.createElement("tr");
           fila.innerHTML = `
-            <td>${inversion.id}</td>
+            <td>${contador}</td>
             <td>$${inversion.monto.toFixed(2)}</td>
-            <td>${inversion.tipo}</td>
+            <td>${id_tipo.data.nombre}</td>
             <td>${inversion.descripcion}</td>
              <td>
             <button onclick="editarInversion(${inversion.id}, ${inversion.monto}, '${inversion.tipo}', '${inversion.descripcion}')">
@@ -38,6 +40,7 @@ document
           </td>
           `;
           tableBody.appendChild(fila);
+          contador++;
         });
       } catch (error) {
         console.error("Error:", error.message);

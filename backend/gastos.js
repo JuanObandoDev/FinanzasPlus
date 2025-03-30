@@ -1,9 +1,8 @@
 document
     .addEventListener("DOMContentLoaded", async function () {
     const SUPABASE_URL = "https://fghnnxllxilqupwtrezh.supabase.co";
-    const SUPABASE_KEY =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnaG5ueGxseGlscXVwd3RyZXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzcyNjEsImV4cCI6MjA1ODc1MzI2MX0.6UiQbo7HZw_Ww1VNFbhRHVeSYz8C-parH1raEAy1_Uk";
-
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnaG5ueGxseGlscXVwd3RyZXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzcyNjEsImV4cCI6MjA1ODc1MzI2MX0.6UiQbo7HZw_Ww1VNFbhRHVeSYz8C-parH1raEAy1_Uk";
+    const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     const tableBody = document.getElementById("gastosTabla");
   
     async function cargarGastos() {
@@ -21,13 +20,16 @@ document
   
         const gastos = await response.json();
         tableBody.innerHTML = "";
+
+        let contador = 1;
   
-        gastos.forEach((gasto) => {
+        gastos.forEach(async(gasto) => {
+          const id_categoria = await SUPABASE.from("categorias_gastos").select("nombre").eq("id_categoria_gasto",gasto.id_categoria_gasto).single();
           const fila = document.createElement("tr");
           fila.innerHTML = `
-            <td>${gasto.id_gasto}</td>
+            <td>${contador}</td>
             <td>$${gasto.monto.toFixed(2)}</td>
-            <td>${gasto.id_categoria_gasto}</td>
+            <td>${id_categoria.data.nombre}</td>
             <td>${gasto.descripcion}</td>
              <td>
             <button onclick="editarGasto(${gasto.id_gasto}, ${gasto.monto}, '${gasto.id_categoria_gasto}', '${gasto.descripcion}')">
@@ -38,6 +40,7 @@ document
           </td>
           `;
           tableBody.appendChild(fila);
+          contador++;
         });
       } catch (error) {
         console.error("Error:", error.message);

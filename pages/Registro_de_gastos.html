@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrar Gastos</title>
     <link rel="stylesheet" href="../styles/registro_gastos_styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   </head>
   <body>
@@ -18,19 +19,9 @@
         <input type="number" id="monto" name="monto" placeholder="$$$$$$$$" />
 
         <label for="categoria">Categoría:</label>
-        <select id="categoria" name="categoria">
-          <option value="Vivienda">Vivienda</option>
-          <option value="Alimentación">Alimentación</option>
-          <option value="Transporte">Transporte</option>
-          <option value="Salud ">Salud</option>
-          <option value="Educacion">Educación</option>
-          <option value="Entretenimiento">Entretenimiento</option>
-          <option value="cuidado-personal">Cuidado Personal</option>
-          <option value="Viajes">Viajes</option>
-          <option value="otros">otros</option>
-        </select>
+        <select id="categoria" name="categoria"></select>
 
-        <label for="descripcion">Descripción (opcional):</label>
+        <label for="descripcion" id="descripcionLabel">Descripción:</label>
         <textarea id="descripcion" name="descripcion"></textarea>
 
         <button class="submit">Registrar</button>

@@ -1,8 +1,8 @@
 document
     .addEventListener("DOMContentLoaded", async function () {
     const SUPABASE_URL = "https://fghnnxllxilqupwtrezh.supabase.co";
-    const SUPABASE_KEY =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnaG5ueGxseGlscXVwd3RyZXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzcyNjEsImV4cCI6MjA1ODc1MzI2MX0.6UiQbo7HZw_Ww1VNFbhRHVeSYz8C-parH1raEAy1_Uk";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnaG5ueGxseGlscXVwd3RyZXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzcyNjEsImV4cCI6MjA1ODc1MzI2MX0.6UiQbo7HZw_Ww1VNFbhRHVeSYz8C-parH1raEAy1_Uk";
+    const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     const tableBody = document.getElementById("deudasTabla");
   
@@ -22,27 +22,33 @@ document
         const deudas = await response.json();
         tableBody.innerHTML = "";
   
-        deudas.forEach((deuda) => {
+        let contador = 1;
+        
+        deudas.forEach(async(deuda) => {
+          console.log(deuda);
+          const id_categoria = await SUPABASE.from("categorias_deudas").select("nombre").eq("id_categoria_deuda",deuda.id_categoria_deuda).single();
+          console.log(id_categoria.error);
           const fila = document.createElement("tr");
           fila.innerHTML = `
-            <td>${deuda.id}</td>
-            <td>$${deuda.monto.toFixed(2)}</td>
-            <td>${new Date(deuda.fecha).toLocaleDateString()}</td>
-            <td>${deuda.categoria}</td>
+            <td>${contador}</td>
+            <td>$${deuda.monto_pagar.toFixed(2)}</td>
+            <td>${new Date(deuda.fecha_vencimiento).toLocaleDateString()}</td>
+            <td>${id_categoria.data.nombre}</td>
             <td>${deuda.descripcion}</td>
              <td>
-            <button onclick="editarDeuda(${deuda.id}, ${deuda.monto}, '${deuda.fecha}', '${deuda.categoria}', '${deuda.descripcion}')">
+            <button onclick="editarDeuda(${deuda.id}, ${deuda.monto_pagar}, '${deuda.fecha_vencimiento}', '${id_categoria.data.nombre}', '${deuda.descripcion}')">
               ✏️ Editar
             </button>
             <button onclick="eliminarDeuda(${deuda.id})" style="background-color: red; color: white;">
               🗑️ Eliminar
             </button>
-            <button onclick="pagarDeuda(${deuda.id},${deuda.monto})" style="background-color: green; color: white;>
+            <button onclick="pagarDeuda(${deuda.id},${deuda.monto})" style="background-color: green; color: white;">
               💰 Pagar
             </button>
           </td>
           `;
           tableBody.appendChild(fila);
+          contador++;
         });
       } catch (error) {
         console.error("Error:", error.message);
@@ -139,10 +145,10 @@ document
   }
 
   document
-    .getElementById("pagoFrom")
+    .getElementById("pagoForm")
     .addEventListener("submit", async function (event) {
     event.preventDefault();
-    const id = document.getElementById("pagoDeudaId").value;
+    const id = document.getElementById("pagoId").value;
     const montoPago = parseFloat(document.getElementById("montoPago").value);
 
     if (montoPago <= 0) {
@@ -186,7 +192,7 @@ document
     if (!responseUpdate.ok) throw new Error("Error al actualizar la deuda");
 
     alert("Pago registrado correctamente.");
-    cerrarPagoForm();
+    cerrarFormularioPago();
     cargarDeudas();
   } catch (error) {
     console.error("Error:", error.message);

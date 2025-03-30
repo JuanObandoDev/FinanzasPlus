@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrar Inversiones</title>
     <link rel="stylesheet" href="../styles/registro_inversion_styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   </head>
   <body>
@@ -18,19 +19,12 @@
         <input type="number" id="monto" name="monto" placeholder="$$$$$$$$" />
 
         <label for="tipo">Tipo:</label>
-        <select id="tipo" name="tipo">
-          <option value="cuentas-ahorro">
-            Cuentas de ahorro de alto rendimiento
-          </option>
-          <option value="acciones">Acciones</option>
-          <option value="criptomonedas">Criptomonedas</option>
-          <option value="metales-preciosos">Metales preciosos</option>
-        </select>
+        <select id="tipo" name="tipo"></select>
 
-        <label for="descripcion">Descripción (opcional):</label>
+        <label for="descripcion" id="descripcionLabel">Descripción:</label>
         <textarea id="descripcion" name="descripcion"></textarea>
 
-        <a href="./inversiones.html" class="submit">Registrar</a>
+        <button href="./inversiones.html" class="submit">Registrar</button>
       </form>
     </div>
     <script src="../backend/registro_de_inversiones.js"></script>

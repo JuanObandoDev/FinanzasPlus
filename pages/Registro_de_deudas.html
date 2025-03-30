@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrar Deudas</title>
     <link rel="stylesheet" href="../styles/registro_deudas_styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   </head>
   <body>
@@ -17,22 +18,16 @@
         <label for="monto">Monto a Pagar:</label>
         <input type="number" id="monto" name="monto" />
 
-        <label for="categoria">Categoria:</label>
-        <select id="categoria" name="categoria">
-          <option value="de-consumo">Deuda de consumo</option>
-          <option value="prestamos-personales">Préstamos personales</option>
-          <option value="hipotecarios">Deuda hipotecaria</option>
-          <option value="educativa">Deuda educativa</option>
-          <option value="otros">otros</option>
-        </select>
-
         <label for="fecha">Fecha de Vencimiento:</label>
         <input type="date" id="fecha" name="fecha" placeholder="--/--/----" />
 
-        <label for="descripcion">Descripción:</label>
+        <label for="categoria">Categoria:</label>
+        <select id="categoria" name="categoria"></select>
+
+        <label for="descripcion" id="descripcionLabel">Descripción:</label>
         <textarea id="descripcion" name="descripcion"></textarea>
 
-        <a href="./deudas.html" class="submit">Registrar</a>
+        <button href="./deudas.html" class="submit">Registrar</button>
       </form>
     </div>
     <script src="../backend/registro_de_deudas.js"></script>
