@@ -9,6 +9,38 @@ body {
   background-color: #f4f4f4;
 }
 
+#loader-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+}
+
+.loader {
+  border: 8px solid #f0f0f0;
+  border-top: 8px solid #4caf50;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  animation: spin 2s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none;
+}
+
 header {
   background-color: #4caf50;
   display: flex;

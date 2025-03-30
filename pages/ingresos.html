@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ingresos</title>
     <link rel="stylesheet" href="../styles/ingresos.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
   </head>
   <body>
-    <header>
+    <div id="loader-container">
+      <div class="loader"></div>
+      <p>Cargando, por favor espera...</p>
+    </div>
+
+    <header class="hidden" id="header">
       <img
         src="../img/Usurio.png"
         alt="Usurio"
@@ -17,7 +23,7 @@
       <a href="./inicio.html">Finanzas Inteligentes</a>
       <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
     </header>
-    <main>
+    <main class="hidden" id="main">
       <nav>
         <a href="./ingresos.html">Ingresos</a>
         <a href="./gastos.html">Gastos</a>
@@ -26,42 +32,7 @@
         <a href="./deudas.html">Deudas</a>
       </nav>
       <h2>Ingresos</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Ingreso</th>
-            <th>Monto</th>
-            <th>Fuente</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>$$$$</td>
-            <td>Trabajo</td>
-            <td>Salario mensual</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>$$$$</td>
-            <td>Venta</td>
-            <td>Venta de productos</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>$$$$</td>
-            <td>Intereses</td>
-            <td>Intereses bancarios</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>$$$$</td>
-            <td>Inversión</td>
-            <td>Ganancias de inversiones</td>
-          </tr>
-        </tbody>
-      </table>
+      <table id="incomeTable"></table>
       <br />
       <div class="actions">
         <a href="./Registro_de_ingresos.html" class="btn add">Agregar</a>
@@ -69,7 +40,7 @@
         <a href="#" class="btn delete">Eliminar</a>
       </div>
     </main>
-    <footer>
+    <footer class="hidden" id="footer">
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
     <div id="sidebar">
@@ -89,6 +60,8 @@
         <p>En esta interfaz puedes agregar, editar y eliminar tus ingresos.</p>
       </div>
     </div>
+    <script src="../backend/validate_session.js"></script>
+    <script src="../backend/load_income_data.js"></script>
     <script src="../backend/inicio.js"></script>
     <script src="../backend/cerrar_sesion.js"></script>
   </body>
