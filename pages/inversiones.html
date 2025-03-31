@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inversiones</title>
     <link rel="stylesheet" href="../styles/inversiones.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
   </head>
+  <script src="../backend/inversiones.js"></script>
   <body>
     <header>
       <img
@@ -33,48 +35,35 @@
             <th>Monto</th>
             <th>Tipo</th>
             <th>Descripción</th>
+            <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>$$$$</td>
-            <td>Acciones</td>
-            <td>Inversion en acciones</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>$$$$</td>
-            <td>Bienes raices</td>
-            <td>Inversion en bienes raices</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>$$$$</td>
-            <td>Metales preciosos</td>
-            <td>Inversion en metales preciosos</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>$$$$</td>
-            <td>Divisas</td>
-            <td>Inversion en divisas</td>
-          </tr>
+        <tbody id="inversionesTabla">
         </tbody>
       </table>
+      <div id="editFilaForm" style="display: none;">
+        <h3>Editar Deuda</h3>
+        <form id="editForm">
+          <input type="hidden" id="editId">
+          <label>Monto:</label>
+          <input type="number" id="editMonto" required>
+          <label>Tipo:</label>
+          <input type="text" id="editTipo" required>
+          <label>Descripción:</label>
+          <input type="text" id="editDescripcion" required>
+          <button type="submit">Guardar Cambios</button>
+          <button type="button" onclick="cerrarFormulario()">Cancelar</button>
+        </form>
+      </div>
       <div class="actions">
-        <a href="./Registro_de_inversion.html" class="btn add">Agregar</a>
-        <a href="./Registro_de_inversion.html" class="btn edit">Editar</a>
-        <a href="#" class="btn delete">Eliminar</a>
+        <a href="./Registro_de_inversiones.html" class="btn add">Agregar</a>
       </div>
     </main>
     <footer>
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
     <div id="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-        >&times;</a
-      >
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="./perfil.html">Perfil</a>
       <a href="./notificaciones.html">Configuración</a>
       <a href="#">Reporte General</a>

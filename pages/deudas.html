@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Deudas</title>
     <link rel="stylesheet" href="../styles/deudas.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
   </head>
+  <script src="../backend/deudas.js"></script>
   <body>
     <header>
       <img
@@ -34,53 +36,47 @@
             <th>fecha</th>
             <th>Categoría</th>
             <th>Descripcion</th>
+            <th>Acciones</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>$$$$</td>
-            <td>01/01/2024</td>
-            <td>Crédito</td>
-            <td>Deuda de tarjeta de crédito</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>$$$$</td>
-            <td>01/01/2024</td>
-            <td>Préstamo</td>
-            <td>Préstamo personal</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>$$$$</td>
-            <td>01/01/2024</td>
-            <td>Crédito</td>
-            <td>Deuda de tarjeta de crédito</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>$$$$</td>
-            <td>01/01/2024</td>
-            <td>Préstamo</td>
-            <td>Préstamo personal</td>
-          </tr>
+        <tbody id="deudasTabla">
         </tbody>
       </table>
+      <div id="editFilaForm" style="display: none;">
+        <h3>Editar Deuda</h3>
+        <form id="editForm">
+          <input type="hidden" id="editId">
+          <label>Monto:</label>
+          <input type="number" id="editMonto" required>
+          <label>Fecha:</label>
+          <input type="date" id="editFecha" required>
+          <label>Categoría:</label>
+          <input type="text" id="editCategoria" required>
+          <label>Descripción:</label>
+          <input type="text" id="editDescripcion" required>
+          <button type="submit">Guardar Cambios</button>
+          <button type="button" onclick="cerrarFormulario()">Cancelar</button>
+        </form>
+      </div>
+      <div id="agregarPagoForm" style="display: none;">
+        <h3>Agregar Pago</h3>
+        <form id="pagoForm">
+          <input type="hidden" id="pagoId">
+          <label>Monto:</label>
+          <input type="number" id="pagoMonto">
+          <button type="submit">Guardar Cambios</button>
+          <button type="button" onclick="cerrarFormularioPago()">Cancelar</button>
+        </form>
+      </div>
       <div class="actions">
         <a href="./Registro_de_deudas.html" class="btn add">Agregar</a>
-        <a href="./Registro_de_deudas.html" class="btn edit">Editar</a>
-        <a href="#" class="btn delete">Eliminar</a>
-        <a href="./Registro_de_gastos.html" class="btn add">Agregar Pago</a>
       </div>
     </main>
     <footer>
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
     <div id="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-        >&times;</a
-      >
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <a href="./perfil.html">Perfil</a>
       <a href="./notificaciones.html">Configuración</a>
       <a href="#">Reporte General</a>
