@@ -38,19 +38,18 @@
             <th>Acciones</th>
           </tr>
         </thead>
-        <tbody id="gastosTabla">
-        </tbody>
+        <tbody id="gastosTabla"></tbody>
       </table>
-      <div id="editFilaForm" style="display: none;">
+      <div id="editFilaForm" style="display: none">
         <h3>Editar Deuda</h3>
         <form id="editForm">
-          <input type="hidden" id="editId">
+          <input type="hidden" id="editId" />
           <label>Monto:</label>
-          <input type="number" id="editMonto" required>
+          <input type="number" id="editMonto" required />
           <label>Categoría:</label>
-          <input type="text" id="editCategoria" required>
+          <input type="text" id="editCategoria" required />
           <label>Descripción:</label>
-          <input type="text" id="editDescripcion" required>
+          <input type="text" id="editDescripcion" required />
           <button type="submit">Guardar Cambios</button>
           <button type="button" onclick="cerrarFormulario()">Cancelar</button>
         </form>
@@ -63,7 +62,9 @@
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
     <div id="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
+        >&times;</a
+      >
       <a href="./perfil.html">Perfil</a>
       <a href="./notificaciones.html">Configuración</a>
       <a href="#">Reporte General</a>
@@ -77,6 +78,7 @@
         <p>En esta interfaz puedes agregar, editar y eliminar tus gastos.</p>
       </div>
     </div>
+    <script src="../backend/validate_session.js"></script>
     <script src="../backend/inicio.js"></script>
     <script src="../backend/cerrar_sesion.js"></script>
   </body>
