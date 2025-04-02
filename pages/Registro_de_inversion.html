@@ -6,31 +6,175 @@
     <title>Registrar Inversiones</title>
     <link rel="stylesheet" href="../styles/registro_inversion_styles.css" />
   </head>
-  <body>
-    <div class="container">
-      <header>
-        <a href="./inversiones.html" class="back-button">&lt;</a>
-        <h1>Registrar nueva Inversión</h1>
-      </header>
-      <form>
-        <label for="monto">Monto:</label>
-        <input type="text" id="monto" name="monto" placeholder="$$$$$$$$" />
+  <style>
+    /* Estilos mejorados con container más pequeño */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    header {
+      background: #4a6baf;
+      color: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .back-button {
+      color: white;
+      font-size: 22px;
+      text-decoration: none;
+      margin-right: 12px;
+      font-weight: bold;
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    
+    form {
+      padding: 25px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 16px;
+      color: #333;
+    }
+    
+    input[type="text"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      box-sizing: border-box;
+      background: #f9f9f9;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+    }
+    
+    input[type="text"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #4a6baf;
+      background: #f0f0f0;
+      box-shadow: 0 0 5px rgba(74, 107, 175, 0.3);
+    }
+    
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    
+    .submit {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #4a6baf;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    
+    .submit:hover {
+      background: #3a5a9f;
+    }
+    
+    /* Estilo específico para el select */
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      background-size: 15px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        margin: 10px;
+        border-radius: 5px;
+      }
+      
+      header {
+        padding: 12px;
+      }
+      
+      h1 {
+        font-size: 18px;
+      }
+      
+      form {
+        padding: 15px;
+      }
+      
+      label {
+        font-size: 15px;
+      }
+      
+      input[type="text"],
+      select,
+      textarea {
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="./inversiones.html" class="back-button">&lt;</a>
+      <h1>Registrar nueva Inversión</h1>
+    </header>
+    <form>
+      <label for="monto">Monto:</label>
+      <input type="text" id="monto" name="monto" placeholder="$$$$$$$$" />
 
-        <label for="tipo">Tipo:</label>
-        <select id="tipo" name="tipo">
-          <option value="cuentas-ahorro">
-            Cuentas de ahorro de alto rendimiento
-          </option>
-          <option value="acciones">Acciones</option>
-          <option value="criptomonedas">Criptomonedas</option>
-          <option value="metales-preciosos">Metales preciosos</option>
-        </select>
+      <label for="tipo">Tipo:</label>
+      <select id="tipo" name="tipo">
+        <option value="cuentas-ahorro">
+          Cuentas de ahorro de alto rendimiento
+        </option>
+        <option value="acciones">Acciones</option>
+        <option value="criptomonedas">Criptomonedas</option>
+        <option value="metales-preciosos">Metales preciosos</option>
+      </select>
 
-        <label for="descripcion">Descripción (opcional):</label>
-        <textarea id="descripcion" name="descripcion"></textarea>
+      <label for="descripcion">Descripción (opcional):</label>
+      <textarea id="descripcion" name="descripcion" placeholder="Detalles adicionales..."></textarea>
 
-        <a href="./inversiones.html" class="submit">Registrar</a>
-      </form>
-    </div>
-  </body>
+      <a href="./inversiones.html" class="submit">Registrar</a>
+    </form>
+  </div>
+</body>
 </html>

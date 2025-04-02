@@ -11,28 +11,195 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   </head>
-  <body>
-    <div class="container">
-      <header>
-        <a href="./inicio_de_sesion.html" class="back-button">&lt;</a>
-        <h1>Restablecer contraseña</h1>
-      </header>
-      <main>
-        <p>
-          Se enviará un enlace a su dirección de correo electrónico para
-          restablecer su contraseña.
-        </p>
-        <form id="recoveryPassForm">
-          <label for="email">E-mail</label>
-          <input type="email" id="email" name="email" />
-          <button class="btn">Enviar</button>
-        </form>
-        <nav>
-          <a href="./inicio_de_sesion.html">ingresar</a>
-          <a href="./Registro_de_usuarios.html">Registrate</a>
-        </nav>
-      </main>
-    </div>
-    <script src="../backend/restablecimiento_contrasena.js"></script>
-  </body>
+  <style>
+    /* Estilos consistentes con los formularios anteriores */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 500px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    header {
+      background: #4a6baf;
+      color: white;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .back-button {
+      color: white;
+      font-size: 22px;
+      text-decoration: none;
+      margin-right: 12px;
+      font-weight: bold;
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    
+    main {
+      padding: 25px;
+    }
+    
+    main p {
+      color: #555;
+      margin-bottom: 25px;
+      line-height: 1.5;
+      text-align: center;
+    }
+    
+    form {
+      margin-bottom: 25px;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 16px;
+      color: #333;
+    }
+    
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      box-sizing: border-box;
+      background: #f9f9f9;
+      transition: all 0.3s ease;
+      margin-bottom: 20px;
+    }
+    
+    input[type="email"]:focus {
+      outline: none;
+      border-color: #4a6baf;
+      background: #f0f0f0;
+      box-shadow: 0 0 5px rgba(74, 107, 175, 0.3);
+    }
+    
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background: #4a6baf;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+    }
+    
+    .btn:hover {
+      background: #3a5a9f;
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #eee;
+      padding-top: 20px;
+    }
+    
+    nav a {
+      color: #4a6baf;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    
+    nav a:hover {
+      text-decoration: underline;
+    }
+    
+    /* Mensaje de error (puede ser mostrado dinámicamente) */
+    .error-message {
+      color: #e74c3c;
+      font-size: 13px;
+      margin-top: -15px;
+      margin-bottom: 15px;
+      display: none;
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        margin: 10px;
+        border-radius: 5px;
+      }
+      
+      header {
+        padding: 12px;
+      }
+      
+      h1 {
+        font-size: 18px;
+      }
+      
+      main {
+        padding: 15px;
+      }
+      
+      label {
+        font-size: 15px;
+      }
+      
+      input[type="email"] {
+        padding: 10px;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="./inicio_de_sesion.html" class="back-button">&lt;</a>
+      <h1>Restablecer contraseña</h1>
+    </header>
+    <main>
+      <p>
+        Se enviará un enlace a su dirección de correo electrónico para
+        restablecer su contraseña.
+      </p>
+      <form id="recoveryPassForm">
+        <label for="email">E-mail</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="tu@email.com"
+          required
+        />
+        <div class="error-message" id="email-error"></div>
+        <button type="submit" class="btn">Enviar</button>
+      </form>
+      <nav>
+        <a href="./inicio_de_sesion.html">Ingresar</a>
+        <a href="./Registro_de_usuarios.html">Registrate</a>
+      </nav>
+    </main>
+  </div>
+  <script src="../backend/restablecimiento_contrasena.js"></script>
+</body>
 </html>

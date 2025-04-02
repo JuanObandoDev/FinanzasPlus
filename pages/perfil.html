@@ -6,21 +6,169 @@
     <title>Perfil</title>
     <link rel="stylesheet" href="../styles/perfil_styles.css" />
   </head>
-  <body>
-    <div class="container">
-      <header>
-        <a href="./inicio.html" class="back-button">&lt;</a>
-      </header>
-      <main>
-        <img src="../img/Usurio.png" alt="Usuario" />
-        <h1>Perfil</h1>
-        <nav>
-          <a href="./Creacion_nueva_contrasena.html">Cambio de contraseña</a>
-          <a href="./notificaciones.html">Notificaciones</a>
-          <button id="closeSession">Cerrar sesión</button>
-        </nav>
-      </main>
-    </div>
-    <script src="../backend/cerrar_sesion.js"></script>
-  </body>
+  <style>
+    /* Fuentes y estilos generales */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+      min-height: 100vh;
+    }
+    
+    /* Container */
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    
+    /* Header */
+    header {
+      padding: 1.5rem 0;
+    }
+    
+    .back-button {
+      color: #4338CA;
+      font-size: 1.8rem;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .back-button:hover {
+      background-color: rgba(67, 56, 202, 0.1);
+      transform: translateX(-3px);
+    }
+    
+    /* Main content */
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: white;
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      margin-top: 1rem;
+    }
+    
+    main img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #6366F1;
+      margin-bottom: 1.5rem;
+    }
+    
+    h1 {
+      color: #4338CA;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+    
+    /* Navegación */
+    nav {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    nav a {
+      display: block;
+      padding: 1rem;
+      background-color: #f5f7fa;
+      color: #4338CA;
+      text-decoration: none;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+    
+    nav a:hover {
+      background-color: #4338CA;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Botón de cerrar sesión */
+    #closeSession {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      background-color: #f5f7fa;
+      color: #EF4444;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+      text-align: center;
+    }
+    
+    #closeSession:hover {
+      background-color: #FEE2E2;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0.5rem;
+      }
+      
+      main {
+        padding: 1.5rem;
+      }
+      
+      main img {
+        width: 100px;
+        height: 100px;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="./inicio.html" class="back-button">&lt;</a>
+    </header>
+    <main>
+      <img src="../img/Usurio.png" alt="Usuario" />
+      <h1>Perfil</h1>
+      <nav>
+        <a href="./Creacion_nueva_contrasena.html">Cambio de contraseña</a>
+        <a href="./notificaciones.html">Notificaciones</a>
+        <button id="closeSession">Cerrar sesión</button>
+      </nav>
+    </main>
+  </div>
+
+  <script src="../backend/cerrar_sesion.js"></script>
+</body>
 </html>

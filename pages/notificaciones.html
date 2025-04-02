@@ -6,45 +6,216 @@
     <title>Configuración de Notificaciones</title>
     <link rel="stylesheet" href="../styles/notificaciones_styles.css" />
   </head>
-  <body>
-    <div class="container">
-      <header>
-        <a href="./inicio.html" class="back-button">&lt;</a>
-        <h1>Configuración de Notificaciones</h1>
-      </header>
-      <main>
-        <form id="notificacionesForm">
-          <div class="form-group">
-            <label for="emailNotificaciones"
-              >Notificaciones por correo electrónico:</label
-            >
+  <style>
+    /* Estilos originales mejorados */
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 800px; /* Más ancho */
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    
+    header {
+      background: #4a6baf;
+      color: white;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+    }
+    
+    .back-button {
+      color: white;
+      font-size: 24px;
+      text-decoration: none;
+      margin-right: 15px;
+      font-weight: bold;
+    }
+    
+    h1 {
+      margin: 0;
+      font-size: 22px;
+    }
+    
+    main {
+      padding: 30px; /* Más espacio */
+    }
+    
+    .form-group {
+      margin-bottom: 25px; /* Más separación */
+      padding: 20px; /* Más espacio interno */
+      background: #f9f9f9;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .form-group:hover {
+      background: #f0f0f0;
+    }
+    
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px; /* Texto más grande */
+      color: #333;
+      cursor: pointer;
+    }
+    
+    /* Checkboxes más grandes */
+    input[type="checkbox"] {
+      -webkit-appearance: none;
+      width: 60px;
+      height: 30px;
+      background: #ddd;
+      border-radius: 15px;
+      position: relative;
+      cursor: pointer;
+      outline: none;
+      transition: all 0.3s;
+    }
+    
+    input[type="checkbox"]:checked {
+      background: #4a6baf;
+    }
+    
+    input[type="checkbox"]:before {
+      content: '';
+      position: absolute;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: white;
+      top: 2px;
+      left: 2px;
+      transition: all 0.3s;
+    }
+    
+    input[type="checkbox"]:checked:before {
+      left: 32px;
+    }
+    
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background: #4a6baf;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+    
+    .btn:hover {
+      background: #3a5a9f;
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        margin: 10px;
+        border-radius: 5px;
+      }
+      
+      header {
+        padding: 15px;
+      }
+      
+      h1 {
+        font-size: 18px;
+      }
+      
+      main {
+        padding: 20px;
+      }
+      
+      .form-group {
+        padding: 15px;
+      }
+      
+      label {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="./inicio.html" class="back-button">&lt;</a>
+      <h1>Configuración de Notificaciones</h1>
+    </header>
+    <main>
+      <form id="notificacionesForm">
+        <div class="form-group">
+          <label for="emailNotificaciones">
+            Notificaciones por correo electrónico
             <input
               type="checkbox"
               id="emailNotificaciones"
               name="emailNotificaciones"
+              checked
             />
-          </div>
-          <div class="form-group">
-            <label for="smsNotificaciones">Notificaciones por SMS:</label>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="smsNotificaciones">
+            Notificaciones por SMS
             <input
               type="checkbox"
               id="smsNotificaciones"
               name="smsNotificaciones"
             />
-          </div>
-          <div class="form-group">
-            <label for="pushNotificaciones">Notificaciones push:</label>
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="pushNotificaciones">
+            Notificaciones push
             <input
               type="checkbox"
               id="pushNotificaciones"
               name="pushNotificaciones"
+              checked
             />
-          </div>
-          <div class="form-group">
-            <a href="./inicio.html" class="btn">Guardar cambios</a>
-          </div>
-        </form>
-      </main>
-    </div>
-  </body>
+          </label>
+        </div>
+        <button type="submit" class="btn">Guardar cambios</button>
+      </form>
+    </main>
+  </div>
+
+  <script>
+    document.getElementById('notificacionesForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const emailNotificaciones = document.getElementById('emailNotificaciones').checked;
+      const smsNotificaciones = document.getElementById('smsNotificaciones').checked;
+      const pushNotificaciones = document.getElementById('pushNotificaciones').checked;
+      
+      // Aquí iría la lógica para guardar las preferencias
+      console.log('Preferencias guardadas:', {
+        email: emailNotificaciones,
+        sms: smsNotificaciones,
+        push: pushNotificaciones
+      });
+      
+      alert('Configuración guardada correctamente');
+    });
+  </script>
+</body>
 </html>

@@ -6,92 +6,451 @@
     <title>Ahorros</title>
     <link rel="stylesheet" href="../styles/ahorros.css" />
   </head>
-  <body>
-    <header>
-      <img
-        src="../img/Usurio.png"
-        alt="Usurio"
-        class="usuario"
-        id="usuarioIcon"
-      />
-      <a href="./inicio.html">Finanzas Inteligentes</a>
-      <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
-    </header>
-    <main>
-      <nav>
-        <a href="./ingresos.html">Ingresos</a>
-        <a href="./gastos.html">Gastos</a>
-        <a href="./ahorros.html">Ahorros</a>
-        <a href="./inversiones.html">Inversiones</a>
-        <a href="./deudas.html">Deudas</a>
-      </nav>
-      <h2>Ahorros</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Ahorro</th>
-            <th>Monto</th>
-            <th>Objetivo</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>$$$$</td>
-            <td>Comprar casa</td>
-            <td>Ahorro para comprar una casa</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>$$$$</td>
-            <td>Comprar auto</td>
-            <td>Ahorro para comprar un auto</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>$$$$</td>
-            <td>Estudios</td>
-            <td>Ahorro para estudios</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>$$$$</td>
-            <td>Viaje</td>
-            <td>Ahorro para viaje</td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="actions">
-        <a href="./registro_de_ahorros.html" class="btn add">Agregar</a>
-        <a href="./registro_de_ahorros.html" class="btn edit">Editar</a>
-        <a href="#" class="btn delete">Eliminar</a>
-      </div>
-    </main>
-    <footer>
-      <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
-    </footer>
-    <div id="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-        >&times;</a
-      >
-      <a href="./perfil.html">Perfil</a>
-      <a href="./notificaciones.html">Configuración</a>
-      <a href="#">Reporte General</a>
-      <a href="#">Material Educativo</a>
-      <button id="closeSession">Cerrar sesión</button>
+  <style>
+    /* Fuentes y estilos generales */
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+    body {
+      background-color: #f5f7fa;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* Header */
+    header {
+      background: linear-gradient(135deg, #6366F1 0%, #4338CA 100%);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    header a {
+      color: white;
+      text-decoration: none;
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    
+    .usuario, .dudas {
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    
+    .usuario:hover, .dudas:hover {
+      transform: scale(1.1);
+    }
+    
+    /* Navegación */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+      flex-wrap: wrap;
+      padding: 0 1rem;
+    }
+    
+    nav a {
+      text-decoration: none;
+      color: #4338CA;
+      background-color: white;
+      padding: 0.8rem 1.2rem;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    
+    nav a:hover {
+      background-color: #4338CA;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Main content */
+    main {
+      flex: 1;
+      padding: 0 2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    
+    h2 {
+      color: #333;
+      margin: 1.5rem 0;
+      font-weight: 600;
+      text-align: center;
+    }
+    
+    /* Tabla de ahorros */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    
+    th {
+      background-color: #4338CA;
+      color: white;
+      font-weight: 600;
+    }
+    
+    tr:hover {
+      background-color: #f5f7fa;
+    }
+    
+    /* Barra de progreso */
+    .progress-container {
+      width: 100%;
+      background-color: #e0e0e0;
+      border-radius: 20px;
+      margin: 0.5rem 0;
+    }
+    
+    .progress-bar {
+      height: 20px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+      text-align: center;
+      color: white;
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 20px;
+    }
+    
+    /* Botones de acción */
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn.add {
+      background-color: #10B981;
+      color: white;
+    }
+    
+    .btn.edit {
+      background-color: #3B82F6;
+      color: white;
+    }
+    
+    .btn.delete {
+      background-color: #EF4444;
+      color: white;
+    }
+    
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+      opacity: 0.9;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: auto;
+      font-size: 0.85rem;
+    }
+    
+    /* Sidebar */
+    #sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+    }
+    
+    #sidebar a, #sidebar button {
+      padding: 15px 25px;
+      text-decoration: none;
+      font-size: 1rem;
+      color: #333;
+      display: block;
+      transition: 0.2s;
+      border: none;
+      text-align: left;
+      width: 100%;
+      background: none;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    #sidebar a:hover, #sidebar button:hover {
+      background-color: #f5f7fa;
+      color: #4338CA;
+    }
+    
+    #closeSession {
+      margin-top: 2rem;
+      color: #ef4444 !important;
+      font-weight: 600;
+    }
+    
+    .closebtn {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 2rem !important;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 200;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 15% auto;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+      animation: modalOpen 0.3s ease;
+    }
+    
+    @keyframes modalOpen {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close:hover {
+      color: black;
+    }
+    
+    .modal h2 {
+      margin-top: 0;
+      color: #4338CA;
+    }
+    
+    .modal p {
+      line-height: 1.6;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      header {
+        padding: 1rem;
+      }
+      
+      header a {
+        font-size: 1.2rem;
+      }
+      
+      table {
+        font-size: 0.9rem;
+      }
+      
+      th, td {
+        padding: 0.8rem;
+      }
+      
+      nav a {
+        flex: 1;
+        text-align: center;
+        min-width: 120px;
+      }
+      
+      .actions {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .btn {
+        width: 100%;
+        max-width: 200px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img
+      src="../img/Usurio.png"
+      alt="Usurio"
+      class="usuario"
+      id="usuarioIcon"
+    />
+    <a href="./inicio.html">Finanzas Plus</a>
+    <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
+  </header>
+  <main>
+    <nav>
+      <a href="./ingresos.html">Ingresos</a>
+      <a href="./gastos.html">Gastos</a>
+      <a href="./ahorros.html">Ahorros</a>
+      <a href="./inversiones.html">Inversiones</a>
+      <a href="./deudas.html">Deudas</a>
+    </nav>
+    
+    <h2>Ahorros</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Ahorro</th>
+          <th>Monto</th>
+          <th>Objetivo</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>$$$$</td>
+          <td>Comprar casa</td>
+          <td>Ahorro para comprar una casa</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>$$$$</td>
+          <td>Comprar auto</td>
+          <td>Ahorro para comprar un auto</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>$$$$</td>
+          <td>Estudios</td>
+          <td>Ahorro para estudios</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>$$$$</td>
+          <td>Viaje</td>
+          <td>Ahorro para viaje</td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <div class="actions">
+      <a href="./registro_de_ahorros.html" class="btn add">Agregar</a>
+      <a href="./registro_de_ahorros.html" class="btn edit">Editar</a>
+      <a href="#" class="btn delete">Eliminar</a>
     </div>
-    <div id="myModal" class="modal">
-      <div class="modal-content">
-        <span class="close" id="closeModal">&times;</span>
-        <h2>Ayuda</h2>
-        <p>
-          En esta interfaz puedes agregar, editar y eliminar tus metas de
-          ahorros.
-        </p>
-      </div>
+  </main>
+  
+  <footer>
+    <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
+  </footer>
+  
+  <div id="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <a href="./perfil.html">Perfil</a>
+    <a href="./notificaciones.html">Configuración</a>
+    <a href="#">Reporte General</a>
+    <a href="#">Material Educativo</a>
+    <button id="closeSession">Cerrar sesión</button>
+  </div>
+  
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h2>Ayuda</h2>
+      <p>En esta interfaz puedes agregar, editar y eliminar tus metas de ahorros.</p>
     </div>
-    <script src="../backend/inicio.js"></script>
-    <script src="../backend/cerrar_sesion.js"></script>
-  </body>
+  </div>
+  
+  <script>
+    // Función para abrir el sidebar
+    function openNav() {
+      document.getElementById("sidebar").style.width = "250px";
+    }
+    
+    // Función para cerrar el sidebar
+    function closeNav() {
+      document.getElementById("sidebar").style.width = "0";
+    }
+    
+    // Event Listeners
+    document.addEventListener('DOMContentLoaded', function() {
+      // Abrir sidebar al hacer clic en el icono de usuario
+      document.getElementById('usuarioIcon').addEventListener('click', openNav);
+      
+      // Abrir modal de ayuda
+      document.getElementById('dudasIcon').addEventListener('click', function() {
+        document.getElementById('myModal').style.display = 'block';
+      });
+      
+      // Cerrar modal
+      document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('myModal').style.display = 'none';
+      });
+      
+      // Cerrar modal al hacer clic fuera
+      window.addEventListener('click', function(event) {
+        if (event.target == document.getElementById('myModal')) {
+          document.getElementById('myModal').style.display = 'none';
+        }
+      });
+    });
+  </script>
+  
+  <script src="../backend/inicio.js"></script>
+  <script src="../backend/cerrar_sesion.js"></script>
+</body>
 </html>
