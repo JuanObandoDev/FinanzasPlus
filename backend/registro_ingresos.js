@@ -6,6 +6,9 @@ const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 window.onload = async function (event) {
   event.preventDefault();
 
+  const loaderContainer = document.getElementById("loader-container");
+  const container = document.getElementById("container");
+
   const { data, error } = await SUPABASE.from("fuentes_ingresos").select(
     "nombre"
   );
@@ -22,6 +25,9 @@ window.onload = async function (event) {
     option.textContent = element.nombre;
     selectElement.appendChild(option);
   });
+
+  loaderContainer.style.display = "none";
+  container.classList.remove("hidden");
 
   selectElement.addEventListener("change", function () {
     if (this.value === "Otra") {
@@ -69,6 +75,13 @@ document
     let fuente = document.getElementById("fuente").value;
     let descripcion = document.getElementById("descripcion").value;
     const id_usuario = localStorage.getItem("userId");
+
+    if (monto <= 0) {
+      alert("El monto debe ser mayor a 0");
+      document.getElementById("monto").value = "";
+      document.getElementById("monto").focus();
+      return;
+    }
 
     if (descripcion.length === 0) {
       const { data, error } = await SUPABASE.from("fuentes_ingresos")
