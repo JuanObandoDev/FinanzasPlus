@@ -61,6 +61,16 @@ footer {
 footer p {
   color: white;
 }
+.header-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.logo {
+  height: 50px;
+  width: auto;
+}
 
 /* Responsive Design */
 @media (max-width: 600px) {
