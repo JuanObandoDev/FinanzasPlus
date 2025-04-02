@@ -11,6 +11,22 @@ document
     const newPass = document.getElementById("new-password").value;
     const confirmPass = document.getElementById("confirm-password").value;
 
+    if (
+      newPass.length < 8 ||
+      !/[A-Z]/.test(newPass) ||
+      !/[a-z]/.test(newPass) ||
+      !/[0-9]/.test(newPass) ||
+      !/[!@#$%^&*]/.test(newPass)
+    ) {
+      alert(
+        "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial."
+      );
+      document.getElementById("new-password").value = "";
+      document.getElementById("confirm-password").value = "";
+      document.getElementById("new-password").focus();
+      return;
+    }
+
     if (newPass != confirmPass) {
       alert("Las contraseñas no coinciden");
       return;
