@@ -3,6 +3,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const userId = localStorage.getItem("userId");
 
   if (!userEmail || !userId) {
-    window.location.href = "../pages/inicio_de_sesion.html";
+    window.location.href = "../pages/not_permissions.html";
   }
 });
