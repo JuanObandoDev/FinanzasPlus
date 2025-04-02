@@ -17,7 +17,7 @@ window.onload = async function (event) {
     const { data: ingresos, error: ingresosError } = await SUPABASE.from(
       "ingresos"
     )
-      .select("id_ingreso, monto, id_fuente_ingreso, descripcion")
+      .select("monto, id_fuente_ingreso, descripcion")
       .eq("id_usuario", localStorage.getItem("userId"));
     if (ingresosError)
       throw new Error(`Error fetching ingresos: ${ingresosError.message}`);
@@ -34,7 +34,12 @@ window.onload = async function (event) {
     const headerRow = document.createElement("thead");
     const header = document.createElement("tr");
 
-    ["ID", "Monto", "Fuente de ingreso", "Descripción"].forEach((title) => {
+    [
+      "ID",
+      "Monto",
+      "Fuente de ingreso",
+      "Descripción" /*, "Acciones"*/,
+    ].forEach((title) => {
       const th = document.createElement("th");
       th.textContent = title;
       header.appendChild(th);
@@ -44,14 +49,16 @@ window.onload = async function (event) {
     tableElement.appendChild(headerRow);
 
     const body = document.createElement("tbody");
+    let counter = 1;
     ingresos.forEach((element, index) => {
       const tr = document.createElement("tr");
 
       const tdId = document.createElement("td");
-      tdId.textContent = element.id_ingreso;
+      tdId.textContent = counter;
+      counter++;
 
       const tdMonto = document.createElement("td");
-      tdMonto.textContent = element.monto;
+      tdMonto.textContent = "$" + element.monto.toFixed(2);
 
       const tdFuente = document.createElement("td");
       tdFuente.textContent =
@@ -60,11 +67,28 @@ window.onload = async function (event) {
       const tdDescripcion = document.createElement("td");
       tdDescripcion.textContent = element.descripcion;
 
-      [tdId, tdMonto, tdFuente, tdDescripcion].forEach((td) =>
+      /*const tdAcciones = document.createElement("td");
+      const btnEditar = document.createElement("button");
+      btnEditar.textContent = "✏️ Editar";
+      const btnEliminar = document.createElement("button");
+      btnEliminar.textContent = "🗑️ Eliminar";
+      tdAcciones.appendChild(btnEditar);
+      tdAcciones.appendChild(btnEliminar);*/
+
+      [tdId, tdMonto, tdFuente, tdDescripcion /*, tdAcciones*/].forEach((td) =>
         tr.appendChild(td)
       );
       body.appendChild(tr);
     });
+
+    if (body.innerHTML == "") {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      td.colSpan = 4;
+      td.textContent = "No hay ingresos registrados";
+      tr.appendChild(td);
+      body.appendChild(tr);
+    }
 
     tableElement.appendChild(body);
 
