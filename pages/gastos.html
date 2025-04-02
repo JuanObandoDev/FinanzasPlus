@@ -5,11 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gastos</title>
     <link rel="stylesheet" href="../styles/gastos.css" />
+    <link rel="stylesheet" href="../styles/loading_page.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
   </head>
-  <script src="../backend/gastos.js"></script>
   <body>
-    <header>
+    <div id="loader-container">
+      <div class="loader"></div>
+      <p>Cargando, por favor espera...</p>
+    </div>
+    <header class="hidden" id="header">
       <img
         src="../img/Usurio.png"
         alt="Usurio"
@@ -19,7 +23,7 @@
       <a href="./inicio.html">Finanzas Inteligentes</a>
       <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
     </header>
-    <main>
+    <main class="hidden" id="main">
       <nav>
         <a href="./ingresos.html">Ingresos</a>
         <a href="./gastos.html">Gastos</a>
@@ -28,18 +32,7 @@
         <a href="./deudas.html">Deudas</a>
       </nav>
       <h2>Gastos</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Gasto</th>
-            <th>Monto</th>
-            <th>Categoría</th>
-            <th>Descripción</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="gastosTabla"></tbody>
-      </table>
+      <table id="gastosTabla"></table>
       <div id="editFilaForm" style="display: none">
         <h3>Editar Deuda</h3>
         <form id="editForm">
@@ -58,7 +51,7 @@
         <a href="./Registro_de_gastos.html" class="btn add">Agregar</a>
       </div>
     </main>
-    <footer>
+    <footer class="hidden" id="footer">
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
     <div id="sidebar">
@@ -78,6 +71,7 @@
         <p>En esta interfaz puedes agregar, editar y eliminar tus gastos.</p>
       </div>
     </div>
+    <script src="../backend/load_outcome_data.js"></script>
     <script src="../backend/validate_session.js"></script>
     <script src="../backend/inicio.js"></script>
     <script src="../backend/cerrar_sesion.js"></script>

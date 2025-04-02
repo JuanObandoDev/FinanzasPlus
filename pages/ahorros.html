@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ahorros</title>
     <link rel="stylesheet" href="../styles/ahorros.css" />
+    <link rel="stylesheet" href="../styles/loading_page.css" />
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
   </head>
   <body>
-    <header>
+    <div id="loader-container">
+      <div class="loader"></div>
+      <p>Cargando, por favor espera...</p>
+    </div>
+    <header class="hidden" id="header">
       <img
         src="../img/Usurio.png"
         alt="Usurio"
@@ -17,7 +23,7 @@
       <a href="./inicio.html">Finanzas Inteligentes</a>
       <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
     </header>
-    <main>
+    <main class="hidden" id="main">
       <nav>
         <a href="./ingresos.html">Ingresos</a>
         <a href="./gastos.html">Gastos</a>
@@ -26,49 +32,12 @@
         <a href="./deudas.html">Deudas</a>
       </nav>
       <h2>Ahorros</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Ahorro</th>
-            <th>Monto</th>
-            <th>Objetivo</th>
-            <th>Descripción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>$$$$</td>
-            <td>Comprar casa</td>
-            <td>Ahorro para comprar una casa</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>$$$$</td>
-            <td>Comprar auto</td>
-            <td>Ahorro para comprar un auto</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>$$$$</td>
-            <td>Estudios</td>
-            <td>Ahorro para estudios</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>$$$$</td>
-            <td>Viaje</td>
-            <td>Ahorro para viaje</td>
-          </tr>
-        </tbody>
-      </table>
+      <table id="savingsTable"></table>
       <div class="actions">
         <a href="./registro_de_ahorros.html" class="btn add">Agregar</a>
-        <a href="./registro_de_ahorros.html" class="btn edit">Editar</a>
-        <a href="#" class="btn delete">Eliminar</a>
       </div>
     </main>
-    <footer>
+    <footer class="hidden" id="footer">
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
     <div id="sidebar">
@@ -91,6 +60,7 @@
         </p>
       </div>
     </div>
+    <script src="../backend/load_savings_data.js"></script>
     <script src="../backend/validate_session.js"></script>
     <script src="../backend/inicio.js"></script>
     <script src="../backend/cerrar_sesion.js"></script>
