@@ -7,28 +7,230 @@
     <link rel="stylesheet" href="../styles/inicio_de_sesion_styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <style>
+      /* Fuentes y estilos generales */
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      body {
+        background-color: #f5f7fa;
+        color: #333;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Main content */
+      main {
+        width: 100%;
+        max-width: 450px;
+        background-color: white;
+        border-radius: 12px;
+        padding: 2.5rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        margin: 1rem;
+        text-align: center;
+      }
+
+      main img {
+        width: 100px;
+        height: 100px;
+        margin-bottom: 1.5rem;
+      }
+
+      h1 {
+        color: #4338ca;
+        margin-bottom: 2rem;
+        font-weight: 600;
+        font-size: 1.75rem;
+      }
+
+      /* Formulario */
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+
+      label {
+        display: block;
+        text-align: left;
+        font-weight: 500;
+        color: #555;
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #6366f1;
+        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+      }
+
+      /* Botón */
+      .btn {
+        background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+        color: white;
+        border: none;
+        padding: 1rem;
+        border-radius: 30px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 1rem;
+        width: 100%;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Enlaces */
+      a {
+        color: #4338ca;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.2s ease;
+        display: inline-block;
+        margin: 0.5rem 0;
+      }
+
+      a:hover {
+        color: #6366f1;
+        text-decoration: underline;
+      }
+
+      /* Mensajes de error */
+      .error-message {
+        color: #ef4444;
+        font-size: 0.85rem;
+        margin-top: -0.5rem;
+        text-align: left;
+        display: none;
+      }
+
+      /* Footer */
+      footer {
+        margin-top: 2rem;
+        text-align: center;
+        color: #666;
+        font-size: 0.85rem;
+        padding: 1rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        main {
+          padding: 1.5rem;
+        }
+
+        h1 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
   </head>
   <body>
     <main>
-      <img src="../img/Usuario.png" alt=" Usuario" />
+      <img src="../img/Usuario.png" alt="Usuario" />
       <h1>Inicio de sesión</h1>
       <form id="formInicioUsuario">
-        <label>Email: </label>
-        <input type="email" name="email" id="email" required />
-        <br />
-        <label>Contraseña: </label>
-        <input type="password" name="password" id="password" required />
-        <br />
-        <button class="btn">Acceder</button>
-        <br />
-        <a href="./Restablecimiento_de_contrasena.html">Olvide mi contraseña</a>
-        <br />
-        <a href="./Registro_de_usuarios.html">Registrase</a>
+        <div class="input-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="tucorreo@ejemplo.com"
+            required
+          />
+          <div class="error-message" id="email-error">
+            Por favor ingresa un email válido
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Contraseña:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Ingresa tu contraseña"
+            required
+          />
+          <div class="error-message" id="password-error">
+            La contraseña es requerida
+          </div>
+        </div>
+
+        <button type="submit" class="btn">Acceder</button>
+
+        <div class="links">
+          <a href="./Restablecimiento_de_contrasena.html"
+            >¿Olvidaste tu contraseña?</a
+          >
+          <a href="./Registro_de_usuarios.html">Registrarse</a>
+        </div>
       </form>
     </main>
+
     <footer>
       <p>&copy; 2024 Finanzas Inteligentes. Todos los derechos reservados.</p>
     </footer>
+    <script>
+      // Validación básica del formulario
+      document
+        .getElementById("formInicioUsuario")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          let isValid = true;
+
+          // Validar email
+          const emailError = document.getElementById("email-error");
+          if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            emailError.style.display = "block";
+            isValid = false;
+          } else {
+            emailError.style.display = "none";
+          }
+
+          // Validar contraseña
+          const passwordError = document.getElementById("password-error");
+          if (!password) {
+            passwordError.style.display = "block";
+            isValid = false;
+          } else {
+            passwordError.style.display = "none";
+          }
+
+          if (isValid) {
+            // Aquí iría la lógica de inicio de sesión
+            console.log("Iniciando sesión...");
+            // window.location.href = './inicio.html'; // Redirigir al dashboard
+          }
+        });
+    </script>
     <script src="../backend/inicio_sesion.js"></script>
   </body>
 </html>
