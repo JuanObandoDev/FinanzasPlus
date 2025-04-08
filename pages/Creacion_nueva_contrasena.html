@@ -7,151 +7,6 @@
     <link rel="stylesheet" href="../styles/creacion_nueva_contrasena.css" />
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <style>
-      /* Fuentes y estilos generales */
-      @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap");
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Montserrat", sans-serif;
-      }
-
-      body {
-        background-color: #f5f7fa;
-        color: #333;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      /* Container */
-      .container {
-        width: 100%;
-        max-width: 500px;
-        background-color: white;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        padding: 2.5rem;
-        margin: 1rem;
-      }
-
-      /* Header */
-      header {
-        text-align: center;
-        margin-bottom: 1.5rem;
-      }
-
-      header h1 {
-        color: #4338ca;
-        font-weight: 600;
-        font-size: 1.75rem;
-      }
-
-      /* Main content */
-      main p {
-        text-align: center;
-        margin-bottom: 1.5rem;
-        color: #555;
-      }
-
-      /* Formulario */
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-      }
-
-      label {
-        font-weight: 500;
-        color: #555;
-        margin-bottom: -0.75rem;
-      }
-
-      input {
-        padding: 0.9rem 1.2rem;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 1rem;
-        transition: all 0.3s ease;
-      }
-
-      input:focus {
-        outline: none;
-        border-color: #6366f1;
-        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
-      }
-
-      /* Botón */
-      button {
-        background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
-        color: white;
-        border: none;
-        padding: 1rem;
-        border-radius: 30px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 0.5rem;
-      }
-
-      button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      /* Mensajes de error */
-      .error-message {
-        color: #ef4444;
-        font-size: 0.85rem;
-        margin-top: -0.75rem;
-        display: none;
-      }
-
-      /* Indicador de fortaleza de contraseña */
-      .password-strength {
-        height: 4px;
-        background-color: #e0e0e0;
-        border-radius: 2px;
-        margin-top: -0.5rem;
-        overflow: hidden;
-      }
-
-      .strength-bar {
-        height: 100%;
-        width: 0%;
-        transition: width 0.3s ease;
-      }
-
-      .weak {
-        background-color: #ef4444;
-        width: 33%;
-      }
-
-      .medium {
-        background-color: #f59e0b;
-        width: 66%;
-      }
-
-      .strong {
-        background-color: #10b981;
-        width: 100%;
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .container {
-          padding: 1.5rem;
-        }
-
-        header h1 {
-          font-size: 1.5rem;
-        }
-      }
-    </style>
   </head>
   <body>
     <div class="container">
@@ -197,7 +52,6 @@
       </main>
     </div>
     <script>
-      // Validación de contraseña en tiempo real
       document
         .getElementById("new-password")
         .addEventListener("input", function (e) {
@@ -205,24 +59,20 @@
           const strengthBar = document.getElementById("password-strength-bar");
           const passwordError = document.getElementById("password-error");
 
-          // Reset
           strengthBar.className = "strength-bar";
           passwordError.style.display = "none";
 
-          // Validar longitud mínima
           if (password.length > 0 && password.length < 8) {
             passwordError.style.display = "block";
             return;
           }
 
-          // Calcular fortaleza
           let strength = 0;
           if (password.length >= 8) strength += 1;
           if (password.match(/[a-z]/) && password.match(/[A-Z]/)) strength += 1;
           if (password.match(/[0-9]/)) strength += 1;
           if (password.match(/[^a-zA-Z0-9]/)) strength += 1;
 
-          // Actualizar barra de progreso
           if (strength <= 1) {
             strengthBar.classList.add("weak");
           } else if (strength <= 3) {
@@ -232,7 +82,6 @@
           }
         });
 
-      // Validar coincidencia de contraseñas
       document
         .getElementById("confirm-password")
         .addEventListener("input", function (e) {
@@ -245,32 +94,6 @@
           } else {
             confirmError.style.display = "none";
           }
-        });
-
-      // Manejar envío del formulario
-      document
-        .getElementById("createNewPassForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
-
-          const password = document.getElementById("new-password").value;
-          const confirmPassword =
-            document.getElementById("confirm-password").value;
-
-          // Validaciones finales
-          if (password.length < 8) {
-            document.getElementById("password-error").style.display = "block";
-            return;
-          }
-
-          if (password !== confirmPassword) {
-            document.getElementById("confirm-error").style.display = "block";
-            return;
-          }
-
-          // Aquí iría la lógica para actualizar la contraseña
-          alert("Contraseña actualizada con éxito");
-          // window.location.href = './inicio.html'; // Redirigir al login
         });
     </script>
     <script src="../backend/crear_nueva_contrasena.js"></script>

@@ -10,25 +10,17 @@ document
     const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     const newPass = document.getElementById("new-password").value;
     const confirmPass = document.getElementById("confirm-password").value;
+    const regex =
+      /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
 
-    if (
-      newPass.length < 8 ||
-      !/[A-Z]/.test(newPass) ||
-      !/[a-z]/.test(newPass) ||
-      !/[0-9]/.test(newPass) ||
-      !/[!@#$%^&*]/.test(newPass)
-    ) {
+    if (!regex.test(newPass)) {
       alert(
-        "La contraseña debe tener al menos 8 caracteres, una letra mayúscula, una letra minúscula, un número y un carácter especial."
+        "La contraseña debe tener al menos 8 caracteres, una letra, un número y un carácter especial."
       );
-      document.getElementById("new-password").value = "";
-      document.getElementById("confirm-password").value = "";
-      document.getElementById("new-password").focus();
       return;
     }
-
-    if (newPass != confirmPass) {
-      alert("Las contraseñas no coinciden");
+    if (newPass !== confirmPass) {
+      alert("Las contraseñas no coinciden, vuelve a intentarlo.");
       return;
     }
 

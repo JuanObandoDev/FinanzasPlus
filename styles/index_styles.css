@@ -8,7 +8,7 @@ body {
   background-color: #f4f4f4;
 }
 header {
-  background-color: #4caf50;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   text-align: center;
   padding: 0.5rem 0;
@@ -39,7 +39,7 @@ p {
 }
 .btn {
   padding: 10px 20px;
-  background-color: #4caf50;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   text-decoration: none;
   border-radius: 5px;

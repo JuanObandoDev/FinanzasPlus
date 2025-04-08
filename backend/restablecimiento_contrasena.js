@@ -16,7 +16,6 @@ document
       .single();
 
     if (error) {
-      alert("El usuario no existe!");
       return;
     }
     localStorage.setItem("userEmail", email);
