@@ -44,6 +44,7 @@ window.onload = async function (event) {
     ].forEach((title) => {
       const th = document.createElement("th");
       th.textContent = title;
+      th.style.textAlign = "center";
       header.appendChild(th);
     });
 
@@ -78,7 +79,10 @@ window.onload = async function (event) {
       tdAcciones.appendChild(btnEliminar);*/
 
       [tdId, tdMonto, tdObjetivo, tdDescripcion /*, tdAcciones*/].forEach(
-        (td) => tr.appendChild(td)
+        (td) => {
+          td.style.textAlign = "center";
+          tr.appendChild(td);
+        }
       );
       body.appendChild(tr);
     });
@@ -87,6 +91,7 @@ window.onload = async function (event) {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
       td.colSpan = 4;
+      td.style.textAlign = "center";
       td.textContent = "No hay inversiones registradas";
       tr.appendChild(td);
       body.appendChild(tr);

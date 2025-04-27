@@ -41,6 +41,7 @@ window.onload = async function (event) {
     ].forEach((title) => {
       const th = document.createElement("th");
       th.textContent = title;
+      th.style.textAlign = "center";
       header.appendChild(th);
     });
 
@@ -88,7 +89,10 @@ window.onload = async function (event) {
         tdFechaVencimiento,
         tdFuente,
         tdDescripcion /*, tdAcciones*/,
-      ].forEach((td) => tr.appendChild(td));
+      ].forEach((td) => {
+        td.style.textAlign = "center";
+        tr.appendChild(td);
+      });
       body.appendChild(tr);
     });
 
@@ -96,6 +100,7 @@ window.onload = async function (event) {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
       td.colSpan = 5;
+      td.style.textAlign = "center";
       td.textContent = "No hay deudas registradas";
       tr.appendChild(td);
       body.appendChild(tr);

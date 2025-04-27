@@ -40,6 +40,7 @@ window.onload = async function (event) {
     ].forEach((title) => {
       const th = document.createElement("th");
       th.textContent = title;
+      th.style.textAlign = "center";
       header.appendChild(th);
     });
 
@@ -73,8 +74,11 @@ window.onload = async function (event) {
       tdAcciones.appendChild(btnEditar);
       tdAcciones.appendChild(btnEliminar);*/
 
-      [tdId, tdMonto, tdFuente, tdDescripcion /*, tdAcciones*/].forEach((td) =>
-        tr.appendChild(td)
+      [tdId, tdMonto, tdFuente, tdDescripcion /*, tdAcciones*/].forEach(
+        (td) => {
+          td.style.textAlign = "center";
+          tr.appendChild(td);
+        }
       );
       body.appendChild(tr);
     });
@@ -84,6 +88,7 @@ window.onload = async function (event) {
       const td = document.createElement("td");
       td.colSpan = 4;
       td.textContent = "No hay gastos registrados";
+      td.style.textAlign = "center";
       tr.appendChild(td);
       body.appendChild(tr);
     }

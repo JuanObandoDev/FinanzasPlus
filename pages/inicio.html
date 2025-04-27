@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Inicio</title>
     <link rel="stylesheet" href="../styles/inicio.css" />
+    <link rel="stylesheet" href="../styles/loading_page.css" />
     <script src="../backend/validate_session.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
   </head>
   <body>
-    <header>
+    <div id="loader-container">
+      <div class="loader"></div>
+      <p>Cargando, por favor espera...</p>
+    </div>
+
+    <header class="hidden" id="header">
       <img
         src="../img/Usurio.png"
         alt="Usurio"
@@ -18,7 +25,7 @@
       <a href="./inicio.html">Finanzas Plus</a>
       <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
     </header>
-    <main>
+    <main class="hidden" id="main">
       <nav>
         <a href="./ingresos.html">Ingresos</a>
         <a href="./gastos.html">Gastos</a>
@@ -27,18 +34,12 @@
         <a href="./deudas.html">Deudas</a>
       </nav>
 
-      <h2>Resumen</h2>
+      <h2 id="Title">Resumen</h2>
 
-      <div class="summary">
-        <label>Total ingresos:</label>
-        <span class="box">$$$$$$</span>
-
-        <label>Total gastos:</label>
-        <span class="box">$$$$$$</span>
-      </div>
+      <div class="summary" id="summary-container"></div>
     </main>
 
-    <footer>
+    <footer class="hidden" id="footer">
       <p>&copy; 2025 Finanzas Plus. Todos los derechos reservados.</p>
     </footer>
 
