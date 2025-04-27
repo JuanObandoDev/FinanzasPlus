@@ -3,43 +3,6 @@ const SUPABASE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnaG5ueGxseGlscXVwd3RyZXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzcyNjEsImV4cCI6MjA1ODc1MzI2MX0.6UiQbo7HZw_Ww1VNFbhRHVeSYz8C-parH1raEAy1_Uk";
 const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-function openNav() {
-  document.getElementById("sidebar").style.width = "250px";
-  document.getElementById("sidebar").style.display = "block";
-}
-
-function closeNav() {
-  document.getElementById("sidebar").style.width = "0";
-}
-
-document.getElementById("usuarioIcon").onclick = function () {
-  openNav();
-};
-
-var modal = document.getElementById("myModal");
-var btn = document.getElementById("dudasIcon");
-var span = document.getElementById("closeModal");
-
-btn.onclick = function () {
-  modal.style.display = "block";
-};
-
-span.onclick = function () {
-  modal.style.display = "none";
-};
-
-window.addEventListener("click", function (event) {
-  if (event.target == document.getElementById("myModal")) {
-    document.getElementById("myModal").style.display = "none";
-  }
-});
-
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
-
 window.onload = async function (event) {
   event.preventDefault();
 
