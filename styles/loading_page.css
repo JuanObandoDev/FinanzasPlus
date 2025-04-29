@@ -1,3 +1,4 @@
+/* Loader Container */
 #loader-container {
   height: 100vh;
   display: flex;
@@ -7,9 +8,10 @@
   background-color: #f0f0f0;
 }
 
+/* Loader Spinner */
 .loader {
-  border: 8px solid #f0f0f0;
-  border-top: 8px solid #4338ca;
+  border: 8px solid #f0f0f0; /* Fondo neutro */
+  border-top: 8px solid #4338ca; /* Color de acento */
   border-radius: 50%;
   width: 80px;
   height: 80px;
@@ -17,6 +19,7 @@
   margin-bottom: 20px;
 }
 
+/* Spin Animation */
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -26,6 +29,7 @@
   }
 }
 
+/* Hidden Utility Class */
 .hidden {
   display: none;
 }

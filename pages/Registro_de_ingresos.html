@@ -3,21 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registrar Ingresos</title>
     <link rel="stylesheet" href="../styles/loading_page.css" />
     <link rel="stylesheet" href="../styles/registro_ingresos_styles.css" />
+    <script src="../backend/validate_session.js"></script>
+    <script defer src="../backend/registro_ingresos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
+    <title>Registrar Ingresos | Finanzas Plus</title>
   </head>
   <body>
     <div id="loader-container">
       <div class="loader"></div>
       <p>Cargando, por favor espera...</p>
     </div>
+
     <div class="container hidden" id="container">
       <header>
         <a href="./ingresos.html" class="back-button">&lt;</a>
         <h1>Registra tus Ingresos</h1>
       </header>
+
       <form id="incomeForm">
         <label for="monto">Monto:</label>
         <input
@@ -40,9 +44,8 @@
           name="descripcion"
         ></textarea>
 
-        <button class="submit">Registrar</button>
+        <button type="submit" class="submit">Registrar</button>
       </form>
     </div>
-    <script src="../backend/registro_ingresos.js"></script>
   </body>
 </html>

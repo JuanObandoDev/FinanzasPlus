@@ -8,25 +8,26 @@ window.onload = async () => {
   const container = document.getElementById("container");
 
   try {
-    const { data: tipos, error } = await SUPABASE.from(
-      "tipos_inversiones"
+    const { data: objetivos, error } = await SUPABASE.from(
+      "objetivos_ahorros"
     ).select("nombre");
-    if (error) throw new Error(`Error al obtener los tipos: ${error.message}`);
+    if (error)
+      throw new Error(`Error al obtener los objetivos: ${error.message}`);
 
-    populateSelectOptions(tipos);
+    populateSelectOptions(objetivos);
 
     loaderContainer.style.display = "none";
     container.classList.remove("hidden");
   } catch (error) {
     console.error(error.message);
-    alert("Hubo un problema al cargar los tipos de inversión.");
+    alert("Hubo un problema al cargar los objetivos de ahorro.");
   }
 };
 
-function populateSelectOptions(tipos) {
-  const selectElement = document.getElementById("tipo");
+function populateSelectOptions(objetivos) {
+  const selectElement = document.getElementById("objetivo");
 
-  tipos.forEach(({ nombre }) => {
+  objetivos.forEach(({ nombre }) => {
     const option = document.createElement("option");
     option.value = nombre;
     option.textContent = nombre;
@@ -38,33 +39,36 @@ function populateSelectOptions(tipos) {
 
 function handleSelectChange(event) {
   const isOtra = event.target.value === "Otra";
-  toggleNewTipoInputs(isOtra);
+  toggleNewObjetivoInputs(isOtra);
   toggleDescripcionRequired(isOtra);
 }
 
-function toggleNewTipoInputs(show) {
-  const parent = document.getElementById("tipo").parentNode;
+function toggleNewObjetivoInputs(show) {
+  const parent = document.getElementById("objetivo").parentNode;
 
   if (show) {
-    if (!document.getElementById("newTipo")) {
-      const newTipo = document.createElement("input");
-      newTipo.setAttribute("type", "text");
-      newTipo.setAttribute("id", "newTipo");
-      newTipo.setAttribute("placeholder", "Escribe el nuevo tipo");
-      newTipo.setAttribute("required", "true");
+    if (!document.getElementById("newObjetivo")) {
+      const newObjetivo = document.createElement("input");
+      newObjetivo.setAttribute("type", "text");
+      newObjetivo.setAttribute("id", "newObjetivo");
+      newObjetivo.setAttribute("placeholder", "Escribe el nuevo objetivo");
+      newObjetivo.setAttribute("required", "true");
 
       const newLabel = document.createElement("label");
-      newLabel.setAttribute("for", "newTipo");
-      newLabel.textContent = "Nuevo tipo:";
-      newLabel.setAttribute("id", "newTipoLabel");
+      newLabel.setAttribute("for", "newObjetivo");
+      newLabel.textContent = "Nueva fuente:";
+      newLabel.setAttribute("id", "newObjetivoLabel");
 
-      parent.insertBefore(newLabel, parent.querySelector("#tipo").nextSibling);
-      parent.insertBefore(newTipo, newLabel.nextSibling);
+      parent.insertBefore(
+        newLabel,
+        parent.querySelector("#objetivo").nextSibling
+      );
+      parent.insertBefore(newObjetivo, newLabel.nextSibling);
     }
   } else {
-    const newTipo = document.getElementById("newTipo");
-    const newLabel = document.getElementById("newTipoLabel");
-    if (newTipo) newTipo.remove();
+    const newObjetivo = document.getElementById("newObjetivo");
+    const newLabel = document.getElementById("newObjetivoLabel");
+    if (newObjetivo) newObjetivo.remove();
     if (newLabel) newLabel.remove();
   }
 }
@@ -90,13 +94,13 @@ function toggleDescripcionRequired(required) {
 }
 
 document
-  .getElementById("inversionesForm")
+  .getElementById("ahorrosForm")
   .addEventListener("submit", async (event) => {
     event.preventDefault();
 
     try {
       const monto = parseFloat(document.getElementById("monto").value);
-      const tipo = document.getElementById("tipo").value;
+      const objetivo = document.getElementById("objetivo").value;
       const descripcionInput = document.getElementById("descripcion").value;
       const id_usuario = localStorage.getItem("userId");
 
@@ -106,32 +110,32 @@ document
         return;
       }
 
-      const descripcion = await getDescripcion(tipo, descripcionInput);
-      const id_tipo_inversion = await getTipoId(tipo);
+      const descripcion = await getDescripcion(objetivo, descripcionInput);
+      const id_objetivo_ahorro = await getObjetivoId(objetivo);
 
       const data = {
         id_usuario,
         monto,
-        id_tipo_inversion,
+        id_objetivo_ahorro,
         descripcion,
       };
 
-      await saveInvestment(data);
+      await saveSavings(data);
 
-      alert("La inversión fue guardada exitosamente");
-      window.location.href = "../pages/inversiones.html";
+      alert("El ahorro fue guardado exitosamente");
+      window.location.href = "../pages/ahorros.html";
     } catch (error) {
       alert(error.message);
       console.error(error);
     }
   });
 
-async function getDescripcion(tipo, descripcionInput) {
+async function getDescripcion(objetivo, descripcionInput) {
   if (descripcionInput.trim().length > 0) return descripcionInput;
 
-  const { data, error } = await SUPABASE.from("tipos_inversiones")
+  const { data, error } = await SUPABASE.from("objetivos_ahorros")
     .select("descripcion")
-    .eq("nombre", tipo)
+    .eq("nombre", objetivo)
     .single();
 
   if (error)
@@ -139,18 +143,18 @@ async function getDescripcion(tipo, descripcionInput) {
   return data.descripcion;
 }
 
-async function getTipoId(tipo) {
-  const { data, error } = await SUPABASE.from("tipos_inversiones")
-    .select("id_tipo_inversion")
-    .eq("nombre", tipo)
+async function getObjetivoId(objetivo) {
+  const { data, error } = await SUPABASE.from("objetivos_ahorros")
+    .select("id_objetivo_ahorro")
+    .eq("nombre", objetivo)
     .single();
 
   if (error)
-    throw new Error(`Error al obtener el ID del tipo: ${error.message}`);
-  return data.id_tipo_inversion;
+    throw new Error(`Error al obtener el ID del objetivo: ${error.message}`);
+  return data.id_objetivo_ahorro;
 }
 
-async function saveInvestment(data) {
-  const { error } = await SUPABASE.from("inversiones").insert([data]);
+async function saveSavings(data) {
+  const { error } = await SUPABASE.from("ahorros").insert([data]);
   if (error) throw new Error("Error al guardar los datos en el servidor");
 }

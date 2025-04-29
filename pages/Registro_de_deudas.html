@@ -3,152 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registrar Deudas</title>
+    <title>Registrar Deudas | Finanzas Plus</title>
     <link rel="stylesheet" href="../styles/registro_deudas_styles.css" />
+    <script src="../backend/validate_session.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
-    <style>
-      /* Estilos mejorados con container más pequeño */
-      body {
-        font-family: "Arial", sans-serif;
-        background-color: #f5f5f5;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh;
-      }
-
-      .container {
-        width: 100%;
-        max-width: 500px; /* Reducido de 800px a 500px */
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-      }
-
-      header {
-        background: #4a6baf;
-        color: white;
-        padding: 15px; /* Reducido de 20px a 15px */
-        display: flex;
-        align-items: center;
-      }
-
-      .back-button {
-        color: white;
-        font-size: 22px; /* Reducido de 24px a 22px */
-        text-decoration: none;
-        margin-right: 12px; /* Reducido de 15px a 12px */
-        font-weight: bold;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: 20px; /* Reducido de 22px a 20px */
-      }
-
-      form {
-        padding: 25px; /* Reducido de 30px a 25px */
-      }
-
-      .form-group {
-        margin-bottom: 20px; /* Reducido de 25px a 20px */
-      }
-
-      label {
-        display: block;
-        margin-bottom: 6px; /* Reducido de 8px a 6px */
-        font-size: 16px; /* Reducido de 18px a 16px */
-        color: #333;
-      }
-
-      input[type="text"],
-      textarea {
-        width: 100%;
-        padding: 12px; /* Reducido de 15px a 12px */
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        font-size: 15px; /* Reducido de 16px a 15px */
-        box-sizing: border-box;
-        background: #f9f9f9;
-        transition: all 0.3s ease;
-      }
-
-      input[type="text"]:focus,
-      textarea:focus {
-        outline: none;
-        border-color: #4a6baf;
-        background: #f0f0f0;
-        box-shadow: 0 0 5px rgba(74, 107, 175, 0.3);
-      }
-
-      textarea {
-        height: 100px; /* Reducido de 120px a 100px */
-        resize: vertical;
-      }
-
-      .submit {
-        display: block;
-        width: 100%;
-        padding: 12px; /* Reducido de 15px a 12px */
-        background: #4a6baf;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px; /* Reducido de 18px a 16px */
-        cursor: pointer;
-        transition: all 0.3s;
-        text-align: center;
-        text-decoration: none;
-        margin-top: 10px;
-      }
-
-      .submit:hover {
-        background: #3a5a9f;
-      }
-
-      /* Responsive */
-      @media (max-width: 600px) {
-        .container {
-          margin: 10px;
-          border-radius: 5px;
-        }
-
-        header {
-          padding: 12px; /* Reducido */
-        }
-
-        h1 {
-          font-size: 18px;
-        }
-
-        form {
-          padding: 15px; /* Reducido */
-        }
-
-        label {
-          font-size: 15px; /* Reducido */
-        }
-
-        input[type="text"],
-        textarea {
-          padding: 10px; /* Reducido */
-        }
-      }
-    </style>
+    <script defer src="../backend/registro_de_deudas.js"></script>
   </head>
   <body>
-    <div class="container">
+    <div id="loader-container">
+      <div class="loader"></div>
+      <p>Cargando, por favor espera...</p>
+    </div>
+
+    <div class="container hidden" id="container">
       <header>
         <a href="./deudas.html" class="back-button">&lt;</a>
         <h1>Registra tus Deudas</h1>
       </header>
+
       <form id="deudaForm">
         <label for="monto">Monto a Pagar:</label>
-        <input type="number" id="monto" name="monto" />
+        <input type="number" id="monto" name="monto" placeholder="$$$$$$" />
 
         <label for="fecha">Fecha de Vencimiento:</label>
         <input type="date" id="fecha" name="fecha" placeholder="--/--/----" />
@@ -162,6 +37,5 @@
         <button href="./deudas.html" class="submit">Registrar</button>
       </form>
     </div>
-    <script src="../backend/registro_de_deudas.js"></script>
   </body>
 </html>

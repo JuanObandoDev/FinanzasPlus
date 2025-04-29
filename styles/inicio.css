@@ -19,7 +19,7 @@ body {
 /* Header */
 header {
   background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
-  color: white;
+  color: #fff; /* Cambiado a hexadecimal para consistencia */
   padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
@@ -28,7 +28,7 @@ header {
 }
 
 header a {
-  color: white;
+  color: inherit; /* Optimización: evita redundancia */
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: 700;
@@ -40,7 +40,7 @@ header a {
   width: 32px;
   height: 32px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease-in-out; /* Añadido ease-in-out para suavidad */
 }
 
 .usuario:hover,
@@ -61,7 +61,7 @@ nav {
 nav a {
   text-decoration: none;
   color: #4338ca;
-  background-color: white;
+  background-color: #fff;
   padding: 0.8rem 1.2rem;
   border-radius: 30px;
   transition: all 0.3s ease;
@@ -71,7 +71,7 @@ nav a {
 
 nav a:hover {
   background-color: #4338ca;
-  color: white;
+  color: #fff;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -93,7 +93,7 @@ h2 {
 }
 
 .summary {
-  background-color: white;
+  background-color: #fff;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -127,7 +127,7 @@ h2 {
 /* Footer */
 footer {
   background-color: #333;
-  color: white;
+  color: #fff; /* Consistencia en colores */
   text-align: center;
   padding: 1rem;
   margin-top: auto;
@@ -143,7 +143,7 @@ footer {
   left: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: 0.3s;
+  transition: width 0.3s ease; /* Especificación clara para la transición */
   padding-top: 60px;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
@@ -156,7 +156,7 @@ footer {
   font-size: 1rem;
   color: #333;
   display: block;
-  transition: 0.2s;
+  transition: background-color 0.2s ease, color 0.2s ease;
   border: none;
   text-align: left;
   width: 100%;
@@ -197,7 +197,7 @@ footer {
 }
 
 .modal-content {
-  background-color: white;
+  background-color: #fff;
   margin: 15% auto;
   padding: 2rem;
   border-radius: 12px;
@@ -227,7 +227,7 @@ footer {
 }
 
 .close:hover {
-  color: black;
+  color: #000; /* Ajuste para mayor contraste */
 }
 
 .modal h2 {

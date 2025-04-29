@@ -3,17 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Inversiones</title>
     <link rel="stylesheet" href="../styles/inversiones.css" />
     <link rel="stylesheet" href="../styles/loading_page.css" />
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
     <script src="../backend/validate_session.js"></script>
+    <script defer src="../backend/load_investments_data.js"></script>
+    <script defer src="../backend/sidebar.js"></script>
+    <script defer src="../backend/cerrar_sesion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
+    <title>Inversiones | Finanzas Plus</title>
   </head>
   <body>
     <div id="loader-container">
       <div class="loader"></div>
       <p>Cargando, por favor espera...</p>
     </div>
+
     <header class="hidden" id="header">
       <img
         src="../img/Usurio.png"
@@ -24,6 +28,7 @@
       <a href="./inicio.html">Finanzas Plus</a>
       <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
     </header>
+
     <main class="hidden" id="main">
       <nav>
         <a href="./ingresos.html">Ingresos</a>
@@ -34,31 +39,17 @@
       </nav>
       <h2>Inversiones</h2>
       <table id="inversionesTabla"></table>
-      <div id="editFilaForm" style="display: none">
-        <h3>Editar Deuda</h3>
-        <form id="editForm">
-          <input type="hidden" id="editId" />
-          <label>Monto:</label>
-          <input type="number" id="editMonto" required />
-          <label>Tipo:</label>
-          <input type="text" id="editTipo" required />
-          <label>Descripción:</label>
-          <input type="text" id="editDescripcion" required />
-          <button type="submit">Guardar Cambios</button>
-          <button type="button" onclick="cerrarFormulario()">Cancelar</button>
-        </form>
-      </div>
       <div class="actions">
         <a href="./Registro_de_inversiones.html" class="btn add">Agregar</a>
       </div>
     </main>
+
     <footer class="hidden" id="footer">
       <p>&copy; 2025 Finanzas Plus. Todos los derechos reservados.</p>
     </footer>
+
     <div id="sidebar">
-      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"
-        >&times;</a
-      >
+      <button class="closebtn" onclick="closeNav()">&times;</button>
       <a href="./perfil.html">Perfil</a>
       <a href="./notificaciones.html">Configuración</a>
       <a href="#">Reporte General</a>
@@ -72,11 +63,10 @@
         <h2>Ayuda</h2>
         <p>
           En esta interfaz puedes agregar, editar y eliminar tus inversiones.
+          Puedes ver un resumen de todas tus inversiones y su rendimiento
+          acumulado.
         </p>
       </div>
     </div>
-    <script src="../backend/load_investments_data.js"></script>
-    <script src="../backend/sidebar.js"></script>
-    <script src="../backend/cerrar_sesion.js"></script>
   </body>
 </html>

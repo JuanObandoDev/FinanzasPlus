@@ -28,7 +28,7 @@ header {
 }
 
 header a {
-  color: white;
+  color: inherit; /* Simplifica la asignación de color */
   text-decoration: none;
   font-size: 1.5rem;
   font-weight: 700;
@@ -40,7 +40,7 @@ header a {
   width: 32px;
   height: 32px;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s ease-in-out;
 }
 
 .usuario:hover,
@@ -183,7 +183,7 @@ footer {
   left: 0;
   background-color: #fff;
   overflow-x: hidden;
-  transition: 0.3s;
+  transition: width 0.3s ease;
   padding-top: 60px;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
@@ -196,7 +196,7 @@ footer {
   font-size: 1rem;
   color: #333;
   display: block;
-  transition: 0.2s;
+  transition: background-color 0.2s ease, color 0.2s ease;
   border: none;
   text-align: left;
   width: 100%;

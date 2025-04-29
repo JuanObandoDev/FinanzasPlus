@@ -4,21 +4,24 @@ const SUPABASE_KEY =
 const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 window.onload = async function (event) {
-  event.preventDefault();
-
   const loaderContainer = document.getElementById("loader-container");
   const pageHeader = document.getElementById("header");
   const main = document.getElementById("main");
   const footer = document.getElementById("footer");
-
   const tableElement = document.getElementById("savingsTable");
 
+  const userId = localStorage.getItem("userId");
+  if (!userId) {
+    console.error("User ID not found in localStorage");
+    return;
+  }
   try {
     const { data: ahorros, error: ahorrosError } = await SUPABASE.from(
       "ahorros"
     )
       .select("monto, id_objetivo_ahorro, descripcion")
-      .eq("id_usuario", localStorage.getItem("userId"));
+      .eq("id_usuario", userId);
+
     if (ahorrosError)
       throw new Error(`Error fetching ahorros: ${ahorrosError.message}`);
 
@@ -28,37 +31,28 @@ window.onload = async function (event) {
         .eq("id_objetivo_ahorro", element.id_objetivo_ahorro)
         .single()
     );
-
     const objetivos = await Promise.all(objetivosPromises);
 
     const headerRow = document.createElement("thead");
     const header = document.createElement("tr");
-
-    [
-      "ID",
-      "Monto",
-      "Objetivo de ahorro",
-      "Descripción" /*, "Acciones"*/,
-    ].forEach((title) => {
+    ["ID", "Monto", "Objetivo de ahorro", "Descripción"].forEach((title) => {
       const th = document.createElement("th");
       th.textContent = title;
+      th.style.textAlign = "center";
       header.appendChild(th);
     });
-
     headerRow.appendChild(header);
     tableElement.appendChild(headerRow);
 
     const body = document.createElement("tbody");
-    let counter = 1;
     ahorros.forEach((element, index) => {
       const tr = document.createElement("tr");
 
       const tdId = document.createElement("td");
-      tdId.textContent = counter;
-      counter++;
+      tdId.textContent = index + 1;
 
       const tdMonto = document.createElement("td");
-      tdMonto.textContent = "$" + element.monto.toFixed(2);
+      tdMonto.textContent = `$${element.monto.toFixed(2)}`;
 
       const tdObjetivo = document.createElement("td");
       tdObjetivo.textContent =
@@ -67,25 +61,19 @@ window.onload = async function (event) {
       const tdDescripcion = document.createElement("td");
       tdDescripcion.textContent = element.descripcion;
 
-      /*const tdAcciones = document.createElement("td");
-      const btnEditar = document.createElement("button");
-      btnEditar.textContent = "✏️ Editar";
-      const btnEliminar = document.createElement("button");
-      btnEliminar.textContent = "🗑️ Eliminar";
-      tdAcciones.appendChild(btnEditar);
-      tdAcciones.appendChild(btnEliminar);*/
-
-      [tdId, tdMonto, tdObjetivo, tdDescripcion /*, tdAcciones*/].forEach(
-        (td) => tr.appendChild(td)
-      );
+      [tdId, tdMonto, tdObjetivo, tdDescripcion].forEach((td) => {
+        td.style.textAlign = "center";
+        tr.appendChild(td);
+      });
       body.appendChild(tr);
     });
 
-    if (body.innerHTML == "") {
+    if (!ahorros.length) {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
       td.colSpan = 4;
       td.textContent = "No hay ahorros registrados";
+      td.style.textAlign = "center";
       tr.appendChild(td);
       body.appendChild(tr);
     }

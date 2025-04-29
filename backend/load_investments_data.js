@@ -3,22 +3,26 @@ const SUPABASE_KEY =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZnaG5ueGxseGlscXVwd3RyZXpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDMxNzcyNjEsImV4cCI6MjA1ODc1MzI2MX0.6UiQbo7HZw_Ww1VNFbhRHVeSYz8C-parH1raEAy1_Uk";
 const SUPABASE = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-window.onload = async function (event) {
-  event.preventDefault();
-
+window.onload = async function () {
   const loaderContainer = document.getElementById("loader-container");
   const pageHeader = document.getElementById("header");
   const main = document.getElementById("main");
   const footer = document.getElementById("footer");
-
   const tableElement = document.getElementById("inversionesTabla");
+
+  const userId = localStorage.getItem("userId");
+  if (!userId) {
+    console.error("User ID not found in localStorage");
+    return;
+  }
 
   try {
     const { data: inversiones, error: inversionesError } = await SUPABASE.from(
       "inversiones"
     )
       .select("monto, id_tipo_inversion, descripcion")
-      .eq("id_usuario", localStorage.getItem("userId"));
+      .eq("id_usuario", userId);
+
     if (inversionesError)
       throw new Error(
         `Error fetching inversiones: ${inversionesError.message}`
@@ -30,69 +34,49 @@ window.onload = async function (event) {
         .eq("id_tipo_inversion", element.id_tipo_inversion)
         .single()
     );
-
-    const tipos = await Promise.all(tiposPromises);
+    const tiposResults = await Promise.all(tiposPromises);
 
     const headerRow = document.createElement("thead");
     const header = document.createElement("tr");
-
-    [
-      "ID",
-      "Monto",
-      "Objetivo de ahorro",
-      "Descripción" /*, "Acciones"*/,
-    ].forEach((title) => {
+    ["ID", "Monto", "Tipo Inversion", "Descripción"].forEach((title) => {
       const th = document.createElement("th");
       th.textContent = title;
       th.style.textAlign = "center";
       header.appendChild(th);
     });
-
     headerRow.appendChild(header);
     tableElement.appendChild(headerRow);
 
     const body = document.createElement("tbody");
-    let counter = 1;
     inversiones.forEach((element, index) => {
       const tr = document.createElement("tr");
 
       const tdId = document.createElement("td");
-      tdId.textContent = counter;
-      counter++;
+      tdId.textContent = index + 1;
 
       const tdMonto = document.createElement("td");
-      tdMonto.textContent = "$" + element.monto.toFixed(2);
+      tdMonto.textContent = `$${element.monto.toFixed(2)}`;
 
-      const tdObjetivo = document.createElement("td");
-      tdObjetivo.textContent =
-        tipos[index]?.data?.nombre || "tipo no encontrado";
+      const tdFuente = document.createElement("td");
+      tdFuente.textContent =
+        tiposResults[index]?.data?.nombre || "Tipo no encontrada";
 
       const tdDescripcion = document.createElement("td");
       tdDescripcion.textContent = element.descripcion;
 
-      /*const tdAcciones = document.createElement("td");
-      const btnEditar = document.createElement("button");
-      btnEditar.textContent = "✏️ Editar";
-      const btnEliminar = document.createElement("button");
-      btnEliminar.textContent = "🗑️ Eliminar";
-      tdAcciones.appendChild(btnEditar);
-      tdAcciones.appendChild(btnEliminar);*/
-
-      [tdId, tdMonto, tdObjetivo, tdDescripcion /*, tdAcciones*/].forEach(
-        (td) => {
-          td.style.textAlign = "center";
-          tr.appendChild(td);
-        }
-      );
+      [tdId, tdMonto, tdFuente, tdDescripcion].forEach((td) => {
+        td.style.textAlign = "center";
+        tr.appendChild(td);
+      });
       body.appendChild(tr);
     });
 
-    if (body.innerHTML == "") {
+    if (!inversiones.length) {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
       td.colSpan = 4;
-      td.style.textAlign = "center";
       td.textContent = "No hay inversiones registradas";
+      td.style.textAlign = "center";
       tr.appendChild(td);
       body.appendChild(tr);
     }
