@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Reporte General — FinanzasPlus</title>
+    <link rel="stylesheet" href="../styles/reporte_general.css" />
+    <link rel="stylesheet" href="../styles/inicio.css" />
+    <link rel="stylesheet" href="../styles/loading_page.css" />
+    <script src="../backend/validate_session.js"></script>
+    <script defer src="../backend/sidebar.js"></script>
+    <script defer src="../backend/reporte_general.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.25/dist/jspdf.plugin.autotable.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
+  </head>
+  <body>
+    <div id="loader-container">
+      <div class="loader"></div>
+      <p>Cargando, por favor espera...</p>
+    </div>
+
+    <header>
+      <img
+        src="../img/Usurio.png"
+        alt="Usuario"
+        class="usuario"
+        id="usuarioIcon"
+      />
+      <a href="./inicio.html">Finanzas Plus</a>
+      <img src="../img/Dudas.png" alt="Dudas" class="dudas" id="dudasIcon" />
+    </header>
+
+    <main class="container" role="main">
+      <h1 class="page-title">Reporte General</h1>
+      <section class="controls" aria-label="Filtros">
+        <div class="field">
+          <label for="rangeStart">Fecha inicio</label>
+          <input id="rangeStart" type="date" />
+        </div>
+        <div class="field">
+          <label for="rangeEnd">Fecha fin</label>
+          <input id="rangeEnd" type="date" />
+        </div>
+        <div class="field">
+          <label for="category">Categoría</label>
+          <select id="category">
+            <option value="all">Todas</option>
+            <option value="ingreso">Ingresos</option>
+            <option value="gasto">Gastos</option>
+            <option value="ahorro">Ahorros</option>
+            <option value="deuda">Deudas</option>
+          </select>
+        </div>
+        <div class="buttons">
+          <button class="btn" id="apply">Aplicar</button>
+          <button class="btn secondary" id="clear">Limpiar</button>
+        </div>
+      </section>
+
+      <div class="layout">
+        <div>
+          <div class="card">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+              "
+            >
+              <h2 style="margin: 0; font-size: 16px">Resumen</h2>
+              <div class="actions">
+                <button class="btn" id="exportPdf">Exportar PDF</button>
+              </div>
+            </div>
+
+            <div class="summary" style="margin-top: 12px">
+              <div class="item">
+                <h3>Ingresos</h3>
+                <p id="totalIncome" style="color: var(--success)">$0.00</p>
+              </div>
+              <div class="item">
+                <h3>Gastos</h3>
+                <p id="totalExpense" style="color: var(--danger)">$0.00</p>
+              </div>
+              <div class="item">
+                <h3>Ahorros</h3>
+                <p id="totalSavings" style="color: var(--primary)">$0.00</p>
+              </div>
+              <div class="item">
+                <h3>Deudas</h3>
+                <p id="totalDebts" style="color: var(--danger)">$0.00</p>
+              </div>
+            </div>
+
+            <div style="margin-top: 16px">
+              <canvas
+                id="byCategoryChart"
+                aria-label="Gráfico por categoría"
+                role="img"
+              ></canvas>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 16px">
+            <h3 style="margin: 0 0 12px 0">Transacciones</h3>
+            <div class="table-container">
+              <table
+                id="transactionsTable"
+                aria-describedby="Transacciones listadas"
+              >
+                <thead>
+                  <tr>
+                    <th>Fecha</th>
+                    <th>Descripción</th>
+                    <th>Categoría</th>
+                    <th class="right">Monto</th>
+                  </tr>
+                </thead>
+                <tbody id="txBody">
+                  <!-- Rows injected by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <aside>
+          <div class="card">
+            <h3 style="margin: 0 0 8px 0">Filtros rápidos</h3>
+            <p class="text-muted" style="margin: 0 0 12px 0">
+              Selecciona un rango de fechas:
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 8px">
+              <button class="btn secondary" id="last7">Últimos 7 días</button>
+              <button class="btn secondary" id="last30">Últimos 30 días</button>
+              <button class="btn secondary" id="thisMonth">Mes actual</button>
+              <button class="btn" id="reset">Ver todo</button>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top: 12px">
+            <h4 style="margin: 0 0 8px 0">Estadísticas rápidas</h4>
+            <ul style="padding-left: 18px; margin: 0">
+              <li class="text-muted">
+                Cantidad de transacciones: <strong id="countTx">0</strong>
+              </li>
+              <li class="text-muted">
+                Promedio por transacción: <strong id="avgTx">$0.00</strong>
+              </li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="hidden" id="footer">
+      <p>&copy; 2025 Finanzas Plus. Todos los derechos reservados.</p>
+    </footer>
+
+    <div id="sidebar">
+      <button class="closebtn" onclick="closeNav()">&times;</button>
+      <a href="./perfil.html">Perfil</a>
+      <a href="./notificaciones.html">Configuración</a>
+      <a href="./reporte_general.html">Reporte General</a>
+      <a href="#">Material Educativo</a>
+      <button id="closeSession">Cerrar sesión</button>
+    </div>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h2>Ayuda</h2>
+        <p>
+          En esta interfaz puedes ver y guardar un reporte general de tus
+          ingresos y gastos realizados y registrados en el sistema.
+        </p>
+      </div>
+    </div>
+    <script>
+      window.addEventListener("load", () => {
+        applyFilters();
+      });
+    </script>
+  </body>
+</html>
