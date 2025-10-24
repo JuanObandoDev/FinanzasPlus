@@ -9,6 +9,9 @@
     <script defer src="../backend/inicio.js"></script>
     <script defer src="../backend/sidebar.js"></script>
     <script defer src="../backend/cerrar_sesion.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-autotable@3.5.25/dist/jspdf.plugin.autotable.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js/dist/umd/supabase.js"></script>
     <title>Inicio | Finanzas Plus</title>
   </head>
@@ -40,7 +43,13 @@
 
       <h2 id="Title">Resumen</h2>
 
-      <div class="summary" id="summary-container"></div>
+      <div class="summary" id="summary-container">
+        <canvas
+          id="byCategoryChart"
+          aria-label="Gráfico por categoría"
+          role="img"
+        ></canvas>
+      </div>
     </main>
 
     <footer class="hidden" id="footer">
