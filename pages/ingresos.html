@@ -39,7 +39,17 @@
       </nav>
       <h2>Ingresos</h2>
       <div class="tablaIngresosScrolleable">
-        <table id="incomeTable"></table>
+        <table id="incomeTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Monto</th>
+              <th>Categoría</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+        </table>
       </div>
       <div class="actions">
         <a href="./Registro_de_ingresos.html" class="btn add">Agregar</a>
@@ -69,6 +79,39 @@
           eliminar ingresos existentes haciendo clic en los botones
           correspondientes en la tabla.
         </p>
+      </div>
+    </div>
+
+    <div id="editIngresoModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeEditIngresoModal">&times;</span>
+        <h2>Editar Ingreso</h2>
+        <form id="editIngresoForm">
+          <label for="editMonto">Monto:</label>
+          <input type="number" id="editMonto" name="editMonto" required />
+
+          <label for="editFuente">Fuente:</label>
+          <input type="text" id="editFuente" name="editFuente" required />
+
+          <label for="editDescripcion">Descripción:</label>
+          <textarea
+            id="editDescripcion"
+            name="editDescripcion"
+            required
+          ></textarea>
+
+          <button type="submit" class="btn save">Guardar Cambios</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="confirmDeleteModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeDeleteModal">&times;</span>
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás seguro de que deseas eliminar este ingreso?</p>
+        <button id="confirmDeleteBtn" class="btn delete">Eliminar</button>
+        <button id="cancelDeleteBtn" class="btn cancel">Cancelar</button>
       </div>
     </div>
   </body>

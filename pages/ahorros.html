@@ -38,7 +38,17 @@
         <a href="./deudas.html">Deudas</a>
       </nav>
       <h2>Ahorros</h2>
-      <table id="savingsTable"></table>
+      <table id="savingsTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Monto</th>
+            <th>Objetivo</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+      </table>
       <div class="actions">
         <a href="./registro_de_ahorros.html" class="btn add">Agregar</a>
       </div>
@@ -68,5 +78,43 @@
         </p>
       </div>
     </div>
+
+    <div id="confirmDeleteModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeDeleteModal">&times;</span>
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás seguro de que deseas eliminar este ahorro?</p>
+        <button id="confirmDeleteBtn" class="btn delete">Eliminar</button>
+        <button id="cancelDeleteBtn" class="btn cancel">Cancelar</button>
+      </div>
+    </div>
+
+    <div id="editAhorroModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeEditAhorroModal">&times;</span>
+        <h2>Editar Ahorro</h2>
+        <form id="editAhorroForm">
+          <label for="editMonto">Monto:</label>
+          <input type="number" id="editMonto" name="editMonto" required />
+
+          <label for="editObjetivo">Objetivo:</label>
+          <input
+            type="text"
+            id="editObjetivo"
+            name="editObjetivo"
+            required
+          />
+
+          <label for="editDescripcion">Descripción:</label>
+          <textarea
+            id="editDescripcion"
+            name="editDescripcion"
+            rows="4"
+            required
+          ></textarea>
+
+          <button type="submit" class="btn save">Guardar Cambios</button>
+        </form>
+      </div>
   </body>
 </html>
