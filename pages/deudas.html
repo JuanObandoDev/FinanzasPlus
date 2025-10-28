@@ -38,7 +38,17 @@
         <a href="./deudas.html">Deudas</a>
       </nav>
       <h2>Deudas</h2>
-      <table id="deudasTabla"></table>
+      <table id="deudasTabla">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Monto</th>
+            <th>Tipo de Deuda</th>
+            <th>Descripción</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+      </table>
       <div class="actions">
         <a href="./Registro_de_deudas.html" class="btn add">Agregar</a>
       </div>
@@ -67,6 +77,38 @@
           En esta interfaz puedes agregar pagos, agregar deudas, editarlas y
           eliminarlas de tu lista de deudas.
         </p>
+      </div>
+    </div>
+
+    <div id="confirmDeleteModal" class="modal">
+      <div class="modal-content">
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás seguro de que deseas eliminar este registro?</p>
+        <button id="confirmDeleteBtn" class="btn confirm">Sí, eliminar</button>
+        <button id="cancelDeleteBtn" class="btn cancel">Cancelar</button>
+      </div>
+    </div>
+
+    <div id="editDeudaModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeEditDeudaModal">&times;</span>
+        <h2>Editar Deuda</h2>
+        <form id="editDeudaForm">
+          <label for="editMonto">Monto:</label>
+          <input type="number" id="editMonto" name="editMonto" required />
+
+          <label for="editTipoDeuda">Tipo de Deuda:</label>
+          <input type="text" id="editTipoDeuda" name="editTipoDeuda" required />
+
+          <label for="editDescripcion">Descripción:</label>
+          <textarea
+            id="editDescripcion"
+            name="editDescripcion"
+            required
+          ></textarea>
+
+          <button type="submit" class="btn save">Guardar Cambios</button>
+        </form>
       </div>
     </div>
   </body>

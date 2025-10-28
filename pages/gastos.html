@@ -38,7 +38,19 @@
         <a href="./deudas.html">Deudas</a>
       </nav>
       <h2>Gastos</h2>
-      <table id="gastosTabla"></table>
+      <div class="table-container">
+        <table id="gastosTabla">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Monto</th>
+              <th>Categoría</th>
+              <th>Descripción</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
       <div class="actions">
         <a href="./Registro_de_gastos.html" class="btn add">Agregar</a>
       </div>
@@ -64,5 +76,39 @@
         <p>En esta interfaz puedes agregar, editar y eliminar tus gastos.</p>
       </div>
     </div>
+
+    <div id="confirmDeleteModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeDeleteModal">&times;</span>
+        <h2>Confirmar Eliminación</h2>
+        <p>¿Estás seguro de que deseas eliminar este gasto?</p>
+        <button id="confirmDeleteBtn" class="btn delete">Eliminar</button>
+        <button id="cancelDeleteBtn" class="btn cancel">Cancelar</button>
+      </div>
+    </div>
+
+    <div id="editGastoModal" class="modal">
+      <div class="modal-content">
+        <span class="close" id="closeEditGastoModal">&times;</span>
+        <h2>Editar Gasto</h2>
+        <form id="editGastoForm">
+          <label for="editMonto">Monto:</label>
+          <input type="number" id="editMonto" name="editMonto" required />
+
+          <label for="editCategoria">Categoría:</label>
+          <select id="editCategoria" name="editCategoria" required>
+          </select>
+
+          <label for="editDescripcion">Descripción:</label>
+          <textarea
+            id="editDescripcion"
+            name="editDescripcion"
+            rows="4"
+            required
+          ></textarea>
+
+          <button type="submit" class="btn save">Guardar Cambios</button>
+        </form>
+      </div>
   </body>
 </html>

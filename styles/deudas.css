@@ -103,10 +103,52 @@ table {
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 
+/* encabezado de tabla fijo */
+table thead {
+  display: block;
+  background-color: #4338ca;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table thead tr th:first-child {
+  width: 10%;
+}
+
+table thead tr th:not(:first-child):not(:last-child) {
+  width: 25%;
+}
+
+table tbody {
+  display: block;
+  max-height: 226px;
+  overflow-y: auto;
+}
+
+table tbody tr td:first-child {
+  width: 10%;
+}
+
+table tbody tr td:not(:first-child):not(:last-child) {
+  width: 25%;
+}
+
+table tbody tr td:nth-last-child(2) {
+  width: 40%;
+}
+
 th,
 td {
   padding: 1rem;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid #f0f0f0;
 }
 
@@ -148,13 +190,13 @@ tr:hover {
 .actions {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 2px;
   flex-wrap: wrap;
 }
 
 .btn {
-  padding: 0.8rem 1.5rem;
+  padding: 8px 16px;
+  border: none;
   border-radius: 30px;
   text-decoration: none;
   font-weight: 600;
@@ -315,6 +357,22 @@ footer {
 
   table {
     font-size: 0.9rem;
+  }
+
+  table thead tr th:not(:first-child):not(:last-child) {
+    width: 23%;
+  }
+
+  table thead tr th:last-child {
+    width: 22%;
+  }
+
+  table tbody tr td:not(:first-child):not(:last-child) {
+    width: 24%;
+  }
+
+  table tbody tr td:nth-last-child(2) {
+    width: 48%;
   }
 
   th,
