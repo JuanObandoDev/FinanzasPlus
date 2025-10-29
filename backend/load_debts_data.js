@@ -146,7 +146,7 @@ const deleteDeuda = async (id) => {
   const cancelDeleteBtn = document.getElementById("cancelDeleteBtn");
 
   confirmDeleteBtn.onclick = async () => {
-    await performDeleteGasto(id);
+    await performDeleteDeuda(id);
     confirmDeleteModal.style.display = "none";
   };
 
