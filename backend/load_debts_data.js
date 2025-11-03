@@ -32,7 +32,7 @@ editDeudaForm.onsubmit = async (e) => {
 
     const { error: updateError } = await SUPABASE.from("deudas")
       .update({
-        monto: parseInt(editMonto.value),
+        monto_pagar: parseInt(editMonto.value),
         id_categoria_deuda: categoriaId,
         descripcion: editDescripcion.value,
       })
@@ -106,21 +106,21 @@ const editDeuda = async (id) => {
     populateSelectOptions(categorias);
 
     const { data: deuda, error: deudaError } = await SUPABASE.from("deudas")
-      .select("monto, id_categoria_deuda, descripcion")
+      .select("monto_pagar, id_categoria_deuda, descripcion")
       .eq("id_deuda", id)
       .single();
 
     if (deudaError)
       throw new Error(`Error fetching deuda: ${deudaError.message}`);
 
-    editMonto.value = deuda.monto;
+    editMonto.value = deuda.monto_pagar;
     editDescripcion.value = deuda.descripcion;
     const categoriaData = await SUPABASE.from("categorias_deudas")
       .select("nombre")
       .eq("id_categoria_deuda", deuda.id_categoria_deuda)
       .single();
 
-    editCategoria.value = categoriaData.data.nombre;
+    editTipoDeuda.value = categoriaData.data.nombre;
 
     editDeudaModal.style.display = "block";
   } catch (error) {
