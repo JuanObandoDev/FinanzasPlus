@@ -65,13 +65,16 @@ function summarize(list) {
 
 let chart;
 function renderChart(list) {
-  const byCategory = list.reduce((acc, tx) => {
-    acc[tx.category] = (acc[tx.category] || 0) + tx.amount;
+  // fixed order and ensure zero values for missing categories
+  const categoriesOrder = ["Ingreso", "Gasto", "Ahorro", "Deuda"];
+  const sums = list.reduce((acc, tx) => {
+    const key = (tx.category || "").toLowerCase();
+    acc[key] = (acc[key] || 0) + Number(tx.amount || 0);
     return acc;
   }, {});
-
-  const labels = Object.keys(byCategory);
-  const data = labels.map((label) => byCategory[label]);
+  const labels = categoriesOrder;
+  const data = categoriesOrder.map((c) => sums[c.toLowerCase()] || 0);
+  const colors = ["#10b981", "#ef4444", "#2563eb", "#f59e0b"];
 
   const ctx = document.getElementById("byCategoryChart").getContext("2d");
   if (chart) chart.destroy();
@@ -83,14 +86,14 @@ function renderChart(list) {
         {
           label: "Monto por categoría",
           data,
-          backgroundColor: ["#10b981", "#ef4444", "#2563eb", "#f59e0b"],
+          backgroundColor: colors,
         },
       ],
     },
     options: {
       responsive: true,
       plugins: { legend: { display: false } },
-      scales: { y: { ticks: { callback: (v) => "$" + v } } },
+      scales: { y: { ticks: { callback: (v) => formatCOP(Number(v)) } } },
     },
   });
 }
