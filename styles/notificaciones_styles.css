@@ -20,7 +20,7 @@ body {
 }
 
 header {
-  background: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   padding: 20px;
   display: flex;
@@ -80,7 +80,7 @@ input[type="checkbox"] {
 }
 
 input[type="checkbox"]:checked {
-  background: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
 }
 
 input[type="checkbox"]:before {
@@ -103,7 +103,7 @@ input[type="checkbox"]:checked:before {
   display: block;
   width: 100%;
   padding: 15px;
-  background: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -114,7 +114,8 @@ input[type="checkbox"]:checked:before {
 }
 
 .btn:hover {
-  background: #3a5a9f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive */

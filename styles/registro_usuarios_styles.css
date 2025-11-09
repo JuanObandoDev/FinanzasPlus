@@ -21,7 +21,7 @@ body {
 }
 
 header {
-  background: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   padding: 15px;
   display: flex;
@@ -70,16 +70,16 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
   outline: none;
-  border-color: #4a6baf;
+  border-color: #6366f1;
   background: #f0f0f0;
-  box-shadow: 0 0 5px rgba(74, 107, 175, 0.3);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
 .submit {
   display: block;
   width: 100%;
   padding: 12px;
-  background: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -91,7 +91,8 @@ input[type="password"]:focus {
 }
 
 .submit:hover {
-  background: #3a5a9f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 form p {
@@ -102,12 +103,13 @@ form p {
 }
 
 form p a {
-  color: #4a6baf;
+  color: #4338ca;
   text-decoration: none;
   font-weight: bold;
 }
 
 form p a:hover {
+  color: #6366f1;
   text-decoration: underline;
 }
 

@@ -20,7 +20,7 @@ body {
 }
 
 header {
-  background: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   padding: 15px;
   display: flex;
@@ -76,7 +76,7 @@ input[type="email"] {
 
 input[type="email"]:focus {
   outline: none;
-  border-color: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   background: #f0f0f0;
   box-shadow: 0 0 5px rgba(74, 107, 175, 0.3);
 }
@@ -85,7 +85,7 @@ input[type="email"]:focus {
   display: block;
   width: 100%;
   padding: 12px;
-  background: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -96,7 +96,8 @@ input[type="email"]:focus {
 }
 
 .btn:hover {
-  background: #3a5a9f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 nav {
@@ -107,13 +108,14 @@ nav {
 }
 
 nav a {
-  color: #4a6baf;
+  color: #4338ca;
   text-decoration: none;
   font-weight: bold;
   font-size: 14px;
 }
 
 nav a:hover {
+  color: #6366f1;
   text-decoration: underline;
 }
 

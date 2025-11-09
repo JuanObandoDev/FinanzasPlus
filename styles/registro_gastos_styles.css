@@ -20,7 +20,7 @@ body {
 }
 
 header {
-  background: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   padding: 15px;
   display: flex;
@@ -74,9 +74,9 @@ input[type="number"]:focus,
 textarea:focus,
 select:focus {
   outline: none;
-  border-color: #4a6baf;
+  border-color: #6366f1;
   background: #f0f0f0;
-  box-shadow: 0 0 5px rgba(74, 107, 175, 0.3);
+  box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
 }
 
 textarea {
@@ -88,7 +88,7 @@ textarea {
   display: block;
   width: 100%;
   padding: 12px;
-  background: #4a6baf;
+  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -101,7 +101,8 @@ textarea {
 }
 
 .submit:hover {
-  background: #3a5a9f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Responsive */
