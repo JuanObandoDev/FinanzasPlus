@@ -150,6 +150,32 @@ async function exportPDF() {
   doc.save("reporte_general.pdf");
 }
 
+function setActiveButton(activeId) {
+  const ids = ["last7", "last30", "thisMonth", "reset"];
+  ids.forEach((id) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (id === activeId) {
+      el.style.backgroundColor = "#2563eb"; // azul de fondo
+      el.style.color = "#ffffff"; // texto blanco
+      // el.style.border = "1px solid #2563eb";
+    } else {
+      el.style.backgroundColor = "#ffffff"; // fondo blanco
+      el.style.color = "#2563eb"; // texto azul
+      // el.style.border = "1px solid #2563eb";
+    }
+  });
+}
+
+// Global click listener to toggle active styles when any control button is clicked
+document.addEventListener("click", (e) => {
+  const ids = ["last7", "last30", "thisMonth", "reset"];
+  const target = e.target;
+  if (target && ids.includes(target.id)) {
+    setActiveButton(target.id);
+  }
+});
+
 function setRangeDays(days) {
   const end = new Date();
   const start = new Date();
@@ -159,6 +185,9 @@ function setRangeDays(days) {
     .slice(0, 10);
   document.getElementById("rangeEnd").value = end.toISOString().slice(0, 10);
   applyFilters();
+  // Fallback: si por alguna razón el click no activó el listener, aplica el estilo al elemento activo
+  const activeId = document.activeElement?.id;
+  if (activeId) setActiveButton(activeId);
 }
 
 function setThisMonth() {
